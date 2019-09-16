@@ -1,0 +1,174 @@
+// for reference:  https://wiki.recurly.net/display/brand/color
+
+// primary palette
+$purple: #723080;
+$purple-tint-1: #f1e9ef;
+$purple-tint-2: #d4c0d7;
+$purple-tint-3: #b897bf;
+$purple-tint-4: #8e5999;
+$purple-shade-1: #5b2666;
+$purple-shade-2: #441c4c;
+$purple-shade-3: #2d1631;
+
+$blue: #2676a5;
+$blue-tint-1: #eaf1f5;
+$blue-tint-2: #bfd6e5;
+$blue-tint-3: #92bad2;
+$blue-tint-4: #5191b7;
+$blue-shade-1: #1e5e84;
+$blue-shade-2: #164663;
+$blue-shade-3: #0c2f41;
+
+$green: #3da07b;
+$green-tint-1: #ecf6f3;
+$green-tint-2: #c6e2d7;
+$green-tint-3: #9ecfbd;
+$green-tint-4: #63b395;
+$green-shade-1: #308062;
+$green-shade-2: #246049;
+$green-shade-3: #1a4031;
+
+
+// secondary palette
+$red: #e35256;
+$red-tint-1: #feefee;
+$red-tint-2: #f4cbcc;
+$red-tint-3: #f1a8aa;
+$red-tint-4: #e87477;
+$red-shade-1: #d33b3e;
+$red-shade-2: #c32427;
+$red-shade-3: #9b1f22;
+
+$orange: #e9a720;
+$orange-tint-1: #fef6ea;
+$orange-tint-2: #f6e4bc;
+$orange-tint-3: #f4d399;
+$orange-tint-4: #edb85c;
+$orange-shade-1: #e19024;
+$orange-shade-2: #d97913;
+$orange-shade-3: #c16d2a;
+
+$yellow: #f1da53;
+$yellow-tint-1: #fdfbef;
+$yellow-tint-2: #faf3cb;
+$yellow-tint-3: #f8eca9;
+$yellow-tint-4: #f3e175;
+$yellow-shade-1: #eaca37;
+$yellow-shade-2: #e4ba1b;
+$yellow-shade-3: #cca72c;
+
+
+// neutral palette
+$black: #000000;
+$white: #ffffff;
+$neutral: #8c8c91;
+$neutral-tint-1: #f3f3f4;
+$neutral-tint-2: #e8e8e9;
+$neutral-tint-3: #c5c5c8;
+$neutral-tint-4: #a3a3a7;
+$neutral-shade-1: #707074;
+$neutral-shade-2: #545457;
+$neutral-shade-3: #38383a;
+
+
+// extended palette
+$teal: #348c91;
+$teal-tint-1: #eaf4f3;
+$teal-tint-2: #c2dcdd;
+$teal-tint-3: #99c4c7;
+$teal-tint-4: #5ba2a6;
+$teal-shade-1: #2a6f73;
+$teal-shade-2: #215456;
+$teal-shade-3: #143739;
+
+$apple: #98bd66;
+$apple-tint-1: #f5f9f0;
+$apple-tint-2: #dfead0;
+$apple-tint-3: #ccddb2;
+$apple-tint-4: #abca83;
+$apple-shade-1: #78974f;
+$apple-shade-2: #5c713f;
+$apple-shade-3: #3d4b2b;
+
+$carrot: #e57b37;
+$carrot-tint-1: #fef2ec;
+$carrot-tint-2: #f6d7c3;
+$carrot-tint-3: #f1bc9b;
+$carrot-tint-4: #ec9761;
+$carrot-shade-1: #cd6835;
+$carrot-shade-2: #b25a30;
+$carrot-shade-3: #814322;
+
+$fuchsia: #ab426c;
+$fuchsia-tint-1: #f6ebef;
+$fuchsia-tint-2: #e5c7d2;
+$fuchsia-tint-3: #d4a1b6;
+$fuchsia-tint-4: #bc5788;
+$fuchsia-shade-1: #893556;
+$fuchsia-shade-2: #682841;
+$fuchsia-shade-3: #441a2a;
+
+$indigo: #4c5392;
+$indigo-tint-1: #eeecf2;
+$indigo-tint-2: #c9cadd;
+$indigo-tint-3: #a6a9c9;
+$indigo-tint-4: #7076a8;
+$indigo-shade-1: #3c4375;
+$indigo-shade-2: #2d3157;
+$indigo-shade-3: #1c2139;
+
+$steel: #59697e;
+$steel-tint-1: #efeff1;
+$steel-tint-2: #cdd2d8;
+$steel-tint-3: #acb4be;
+$steel-tint-4: #798697;
+$steel-shade-1: #475465;
+$steel-shade-2: #343f4b;
+$steel-shade-3: #232932;
+
+$hazel: #90796a;
+$hazel-tint-1: #f3f0ef;
+$hazel-tint-2: #dcd6d2;
+$hazel-tint-3: #c6bbb3;
+$hazel-tint-4: #a59286;
+$hazel-shade-1: #736054;
+$hazel-shade-2: #57483f;
+$hazel-shade-3: #39302a;
+
+
+// theme colors
+$theme-default-bg:               $purple-shade-1; // was color1
+$theme-default-setup-bg:         $purple-shade-2; // was color2
+$theme-default-site-selector-bg: $purple-tint-4;  // was color3
+$theme-default-group-border:     $purple;         // was color4
+$theme-default-setup-box-shadow: $purple-tint-4;  // was color5
+$theme-default-setup-hover-bg:   $purple-shade-1;
+$theme-default-setup-dash:       $purple-tint-4;
+$theme-default-titles:           $purple-tint-2;
+
+$theme-steel-bg:               $steel-shade-1;
+$theme-steel-setup-bg:         $steel-shade-2;
+$theme-steel-site-selector-bg: $steel-tint-4;
+$theme-steel-group-border:     $steel;
+$theme-steel-setup-box-shadow: $steel-tint-4;
+$theme-steel-setup-hover-bg:   $steel-shade-1;
+$theme-steel-setup-dash:       $steel-tint-4;
+$theme-steel-titles:           $steel-tint-2;
+
+$theme-blue-bg:               $blue-shade-2;
+$theme-blue-setup-bg:         $blue-shade-3;
+$theme-blue-site-selector-bg: $blue-shade-1;
+$theme-blue-group-border:     $blue-shade-1;
+$theme-blue-setup-box-shadow: $blue-shade-1;
+$theme-blue-setup-hover-bg:   $blue-shade-2;
+$theme-blue-setup-dash:       $blue-shade-1;
+$theme-blue-titles:           $blue-tint-2;
+
+$theme-teal-bg:               $teal-shade-2;
+$theme-teal-setup-bg:         $teal-shade-3;
+$theme-teal-site-selector-bg: $teal-shade-1;
+$theme-teal-group-border:     $teal-shade-1;
+$theme-teal-setup-box-shadow: $teal-shade-1;
+$theme-teal-setup-hover-bg:   $teal-shade-2;
+$theme-teal-setup-dash:       $teal-shade-1;
+$theme-teal-titles:           $teal-tint-2;

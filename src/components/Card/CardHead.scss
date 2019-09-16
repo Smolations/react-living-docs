@@ -1,0 +1,39 @@
+.CardHead {
+  position: relative;
+  margin: $CardHead-vertical-margin $CardHead-horizontal-margin;
+  padding: $CardHead-vertical-padding $CardHead-horizontal-padding;
+  border-bottom: 1px solid $Card-border-color;
+  font-size: 15px;
+  font-weight: 600;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  // this should not be reused. it was set up for some haml views
+  // but is replaced in the spa with `<Label ribbon>blah</Label>`
+  &.with-Tag {
+    padding-left: 45px;
+
+    .Tag {
+      position: absolute;
+      top: 8px;
+      right: 100%;
+      margin-right: -35px;
+    }
+
+    .Tag + .Titlebar {
+      margin-top: 0;
+    }
+  }
+
+  .Card-badge {
+    padding-left: 0.5em;
+    padding-right: 0.75em;
+    background-color: $white;
+    border: 1px solid $Card-border-color;
+    border-radius: 3px;
+    color: $green;
+    font-weight: 400;
+  }
+}

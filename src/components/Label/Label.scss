@@ -1,0 +1,72 @@
+// unfortunately there is already a .Label class floating around out there so
+// we have to differentiate somehow...
+.Label2 {
+  position: relative;
+  display: inline-block;
+  margin: $Label-vertical-margin $Label-horizontal-margin;
+  padding: $Label-vertical-padding $Label-horizontal-padding;
+  background-color: $neutral-tint-3;
+  border-radius: 2px;
+  color: $neutral-shade-3;
+  font-size: 13px;
+  font-weight: normal;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &.Label--blue {
+    background-color: $blue;
+    color: $white;
+  }
+
+  &.Label--green {
+    background-color: $green;
+    color: $white;
+  }
+
+  &.Label--indigo {
+    background-color: $indigo;
+    color: $white;
+  }
+
+  &.Label--orange {
+    background-color: $orange;
+    color: $white;
+  }
+
+  &.Label--red {
+    background-color: $red;
+    color: $white;
+  }
+
+  &.Label--steel {
+    background-color: $steel;
+    color: $white;
+  }
+
+  &.Label--ribbon {
+    left: -$Label-horizontal-padding;
+    margin-right: 0;
+
+    &.Label--right {
+      transform: translateX(-100%);
+      left: calc(100% + #{$Label-horizontal-padding});
+    }
+  }
+
+
+  /**
+   *  integrations
+   */
+  .CardHead > & {
+    &.Label--ribbon {
+      left: calc(-#{$Label-horizontal-padding} - #{$CardHead-horizontal-padding});
+      margin-right: -$CardHead-horizontal-padding;
+
+      &.Label--right {
+        left: calc(100% + #{$Label-horizontal-padding} + #{$CardHead-horizontal-padding});
+      }
+    }
+  }
+}

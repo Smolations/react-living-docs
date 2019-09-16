@@ -1,0 +1,7 @@
+# https://wiki.recurly.net/display/QA/Recurly+Browser+Requirements
+# _should_ sync with:
+# https://docs.recurly.com/docs/browser-support
+
+last 2 versions
+> 1%
+IE >= 11

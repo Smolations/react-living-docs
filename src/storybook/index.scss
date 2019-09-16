@@ -1,0 +1,45 @@
+/**
+ *  RESET
+ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: white;
+  color: color-text-2;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+
+strong, b {
+  font-weight: semi-bold;
+}
+
+form {
+  margin: 0;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+p, pre {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+/**
+ *  RENDER CONTAINER
+ */
+#storybook {
+  height: 100%;
+}

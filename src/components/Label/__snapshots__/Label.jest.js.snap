@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label can be set as a ribbon 1`] = `
+<div
+  className="Label2 Label--ribbon"
+>
+  labeled
+</div>
+`;
+
+exports[`Label can be set as right-positioned 1`] = `
+<div
+  className="Label2 Label--right"
+>
+  labeled
+</div>
+`;
+
+exports[`Label contains the top-level class name 1`] = `
+<div
+  className="Label2"
+>
+  labeled
+</div>
+`;
+
+exports[`Label renders correct label text 1`] = `
+<div
+  className="Label2"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be blue 1`] = `
+<div
+  className="Label2 Label--blue"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be green 1`] = `
+<div
+  className="Label2 Label--green"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be indigo 1`] = `
+<div
+  className="Label2 Label--indigo"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be orange 1`] = `
+<div
+  className="Label2 Label--orange"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be red 1`] = `
+<div
+  className="Label2 Label--red"
+>
+  labeled
+</div>
+`;
+
+exports[`Label setting different colors can be steel 1`] = `
+<div
+  className="Label2 Label--steel"
+>
+  labeled
+</div>
+`;

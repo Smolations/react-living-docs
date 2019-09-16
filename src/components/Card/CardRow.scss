@@ -1,0 +1,43 @@
+.CardRow {
+  position: relative;
+  display: flex;
+  flex: 1;
+
+  + .CardRow {
+    border-top: 1px solid $Card-sep-color;
+  }
+
+  + .Card-row--empty {
+    margin: -10px 0 -20px;
+  }
+
+  + .CardRow--soft {
+    border-top: 0;
+    margin-top: -$Card-spacing;
+  }
+
+  &.CardRow--soft {
+    .Card-col {
+      border-color: transparent;
+    }
+  }
+
+  &.is-editing {
+    background-color: $neutral-tint-1;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .CardCol ul {
+    padding-left: 16px;
+    margin-bottom: 0px;
+  }
+}
+
+
+@media (max-width: 1709px) {
+  .CardRow {
+    &.PlanDescription {
+      height: 74px;
+    }
+  }
+}

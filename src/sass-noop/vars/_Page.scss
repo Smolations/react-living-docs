@@ -1,0 +1,7 @@
+// the Page component is not being refactored in this change,
+// but these variables are being used for a few Card component
+// styles so we'll add the variables now.
+
+$Page-bg: $neutral-tint-1;
+$Page-head-bg: $white;
+$Page-main-spacing: 24px;

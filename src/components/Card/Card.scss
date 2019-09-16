@@ -1,0 +1,107 @@
+// might be a good idea to eventually make this a flex layout...
+.Card2 {
+  display: block;
+  position: relative;
+  background-color: $white;
+  border-radius: 3px;
+  border: 1px solid $Card-border-color;
+  box-shadow: 0 1px 0 $neutral-tint-2;
+
+  // this looks to be custom styling for a specific view,
+  // so these should eventually move to that view's stylesheet.
+  &.choose-a-plan-card {
+    position: relative;
+    padding-bottom: 73px;
+
+    .Card-head {
+      height: 102px;
+    }
+
+    .Card-foot {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  &.Card--inner {
+    margin: 20px;
+
+    .Card-head {
+      background: $neutral-tint-2;
+    }
+  }
+
+  &.Card--nested-Table {
+    margin: 0 16px 16px;
+    border-radius: 2px;
+    border-color: $neutral-tint-2;
+    box-shadow: none;
+
+    .Table-head {
+      background-color: $neutral-tint-1;
+
+      .Table-cell {
+        border-color: $neutral-tint-2;
+      }
+    }
+  }
+
+  &.Card--secondary {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  + .Card2 {
+    margin-top: $Page-main-spacing;
+  }
+
+  // used only in HPP; consider deprecation in favor
+  // of a simpler solution..
+  &.Card--tab-content {
+    margin-top: 0;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+  }
+
+  // more apparently non-standard classes used in
+  // special cases. consider moving into new component
+  // or deprecation..
+
+  &.Card--centered {
+    margin: 0 auto;
+  }
+
+  &.Card--constrained {
+    max-width: 460px;
+  }
+
+  &.Card--wide {
+    box-shadow: none;
+    padding-left: 15px;
+    width: 600px;
+    border-color: transparent;
+  }
+}
+
+
+// no idea what these are for but will be figured
+// out at refactor time
+
+.l-Card-below-Card {
+  // .l-* classes likely don't belong in here, but meh, let's try it out
+  margin-top: 24px;
+}
+
+.l-Card-below-Titlebar {
+  // .l-* classes likely don't belong in here, but meh, let's try it out
+  margin-top: 10px;
+}
+
+.Card-foot {
+  display: block;
+  margin: 0;
+  padding: $Card-spacing;
+  border-top: 1px solid $Card-sep-color;
+}

@@ -1,0 +1,26 @@
+.CardCol {
+  position: relative;
+  flex: 1;
+  border-left: 1px solid $Card-sep-color;
+  padding: $Card-spacing;
+  padding-top: 14px;
+
+  &:first-of-type {
+    border-left: 0;
+  }
+
+  &.CardCol--slim {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  &.CardCol--soft {
+    border-color: transparent;
+  }
+
+  // don't even ask...it _will_ be rectified
+  &.Col--min {
+    flex: none;
+    flex: initial;
+  }
+}

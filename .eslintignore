@@ -1,0 +1,4 @@
+# Ignore the output and included code.
+/dist/*
+/node_modules/*
+/src/sass-noop/*

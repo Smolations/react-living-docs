@@ -1,0 +1,16 @@
+.Nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $Nav-width;
+
+  padding: 1em;
+
+  background-color: $green;
+  border: 1px solid $green-shade-1;
+  box-shadow: 3px 0 3px $green-tint-2;
+  color: $white;
+
+  z-index: 10;
+}
