@@ -5,10 +5,15 @@ const path = require('path');
 
 const parseFiles = require(path.resolve(__dirname, './lib/parse-files'));
 
-parseFiles(path.resolve(__dirname, '../components/**/*.story.js'));
+// these would probably be passed as some sort of config...
+const babelrcPath = path.resolve(__dirname, '../../.babelrc');
+const port = 8080;
+const stories = parseFiles({
+  patterns: path.resolve(__dirname, '../components/**/*.story.js'),
+});
+
 
 const app = express();
-const port = 8080;
 
 
 function handleProcessRequest(req, resp) {
@@ -17,20 +22,27 @@ function handleProcessRequest(req, resp) {
 
   const trimmedJsx = jsx.trim();
   const transformOpts = {
-    configFile: path.resolve(__dirname, '../../.babelrc'),
+    configFile: babelrcPath,
   };
 
   const transpiled = Babel.transform(trimmedJsx, transformOpts);
-  const code = transpiled.code.replace(/"use strict";\n*/, '').trim();;
+  const code = transpiled.code.replace(/"use strict";\n*/, '').trim();
   console.log('\nTRANSPILED:\n', code);
 
   return resp.send({ transpiledJsx: code });
+}
+
+function handleStoriesRequest(req, resp) {
+  return resp.send({ stories });
 }
 
 
 app.use(cors());
 app.use(express.json());
 
+/** ROUTES **/
+app.get('/stories', handleStoriesRequest);
+
 app.post('/process', handleProcessRequest);
 
-// app.listen(port, () => console.log(`Storybook server listening on port ${port}!`));
+app.listen(port, () => console.log(`Storybook server listening on port ${port}!`));

@@ -6,23 +6,26 @@ const babelGenerate = require('@babel/generator').default;
 const babelParser = require('@babel/parser');
 const babelTemplate = require('@babel/template').default;
 const types = require('@babel/types');
+const recast = require('recast');
 
 const babelRecast = require('./babel-recast');
+
 const inspect = require('./inspect');
-const tryTraverse = require('./try-traverse');
-const parseGlobalsFromAst = require('./parse-globals-from-ast.js');
+const logAstToCode = require('./log-ast-to-code');
+const babelRecastParse = require('./babel-recast-parse');
 
 
 
-function parseFiles(patterns = [], globOpts = {}) {
+function parseFiles({
+  patterns = [],
+  opts: {
+    glob: globOpts = {},
+    parser = {},
+  } = {},
+}, callback = () => {}) {
   const filePaths = [];
-  const parserOpts = {
-    sourceType: 'module',
-    plugins: [
-      'jsx',
-    ],
-  };
   let globPatterns = patterns;
+
 
   if (!Array.isArray(patterns)) {
     globPatterns = [patterns];
@@ -33,52 +36,28 @@ function parseFiles(patterns = [], globOpts = {}) {
   }
 
   globPatterns.forEach((globPattern) => {
-    filePaths.push(...glob.sync(globPattern, globOpts))
+    filePaths.push(...glob.sync(globPattern, globOpts));
   });
 
-  console.log('--------------- File Paths ---------------\n', filePaths, '\n------------------------------------------\n\n');
 
   filePaths.forEach((filePath) => {
     console.log(`READING FILE:  ${filePath}`);
     console.log('------------------------------------------')
+    const content = fs.readFileSync(filePath, { encoding: 'UTF-8' });
 
-    fs.readFile(filePath, { encoding: 'UTF-8' }, (err, content) => {
-      if (err) {
-        throw err;
-      }
+    // getting info from the file path
+    const fileName = path.basename(filePath);
+    const storyName = fileName.split('.').shift();
 
-      const fileName = path.basename(filePath);
-      const storyName = fileName.split('.').unshift();
+    // grab the ast for the story file
+    const ast = babelRecastParse(content);
 
-      console.log(babelRecast(content, parserOpts));
+    callback({ ast, story: { filePath, name: storyName } });
 
-      const ast = babelParser.parse(content, parserOpts);
+    logAstToCode(ast);
 
-      const globals = parseGlobalsFromAst(ast);
-      const globalIdentifiers = globals.reduce((ids, id) => {
-        ids.push(types.identifier(id));
-        return ids;
-      }, []);
-
-      const addGlobals = babelTemplate`
-        const globals = GLOBALS;
-      `;
-      const globalsAst = addGlobals({
-        GLOBALS: types.arrayExpression(globalIdentifiers),
-      });
-
-
-      // tryTraverse(ast);
-
-
-      const generatorOpts = {
-        retainFunctionParens: true,
-        retainLines: true,
-      };
-      // console.log(babelGenerate(ast, generatorOpts).code);
-    });
+    console.log('\nEOF\n')
   });
-
 }
 
 

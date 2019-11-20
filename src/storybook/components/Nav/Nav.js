@@ -9,9 +9,9 @@ export default function Nav(props) {
 
 
   function renderChapters(story) {
-    return story.chapters.map(({ label }) => (
+    return story.chapters.map((name) => (
       <li>
-        {label}
+        {name}
       </li>
     ));
   }
@@ -25,7 +25,7 @@ export default function Nav(props) {
       <ul>
         {stories.map(story => (
           <li>
-            <h3>{story.id}</h3>
+            <h3>{story.name}</h3>
             <ul>
               {renderChapters(story)}
             </ul>
