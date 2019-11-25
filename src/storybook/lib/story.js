@@ -2,17 +2,19 @@ export default class Story {
   chapters = []
 
 
-  constructor(id) {
+  constructor(id, { globals }) {
     this.id = id;
+    this.globals = globals;
   }
 
 
-  addChapter(label, opts) {
-    this.chapters.push({
-      label,
-      opts,
-    });
+  addChapter(chapter) {
+    this.chapters.push(chapter);
 
     return this;
+  }
+
+  findChapter(chapterName) {
+    return this.chapters.find(chapter => chapter.title === chapterName);
   }
 }

@@ -9,6 +9,7 @@ function storyChapterTemplate({
   props,
   code,
 }) {
+  const idLiteral = babelTypes.stringLiteral(title);
   const titleLiteral = babelTypes.stringLiteral(startCase(title));
   const propsId = scope.generateUidIdentifier('chapterProps');
   const chapterId = scope.generateUidIdentifier('chapterCode');
@@ -24,6 +25,7 @@ function storyChapterTemplate({
     const CHAPTER_UID = \`\n${code}\n\`;
 
     story.addChapter({
+      id: ID,
       title: TITLE,
       props: PROPS_UID,
       code: CHAPTER_UID,
@@ -31,6 +33,7 @@ function storyChapterTemplate({
   `);
 
   const astPartial = tmpl({
+    ID: idLiteral,
     TITLE: titleLiteral,
     PROPS_UID: propsId,
     PROPS: propsObjExpr,

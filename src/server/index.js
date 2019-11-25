@@ -3,15 +3,14 @@ const cors = require('cors');
 const express = require('express');
 const path = require('path');
 
-const parseFiles = require(path.resolve(__dirname, './lib/parse-files'));
+const parseChaptersFromAst = require(path.resolve(__dirname, './lib/parse-chapters-from-ast'));
+const inspect = require(path.resolve(__dirname, './lib/inspect'));
 
 // these would probably be passed as some sort of config...
 const babelrcPath = path.resolve(__dirname, '../../.babelrc');
 const port = 8080;
-const stories = parseFiles({
-  patterns: path.resolve(__dirname, '../components/**/*.story.js'),
-});
-
+const stories = parseChaptersFromAst(path.resolve(__dirname, '../components/**/*.story.js'));
+inspect(stories)
 
 const app = express();
 

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 import getComponentFromString from 'storybook/lib/get-component-from-string';
 
@@ -8,37 +9,67 @@ import './Stage.scss';
 
 
 export default function Stage(props) {
+  const { componentJsx, componentProps } = props;
   const [{
     app: {
-      jsxProps,
-      transpiledJsx,
+      selectedChapter,
     },
   }] = useGlobalStateValue();
-  console.log('[Stage] jsxProps:\n%o', jsxProps);
-  console.log('[Stage] transpiledJsx:\n%o', transpiledJsx);
+  console.groupCollapsed('[Stage]');
+  console.log('componentProps:\n%o', componentProps);
+  console.log('componentJsx:\n%o', componentJsx);
+  console.log('selectedChapter: %o', selectedChapter);
 
   const [{ Component }, setComponent] = useState({});
+  console.log('Component: %o', Component);
 
-  const componentProps = JSON.parse(jsxProps);
+  const parsedComponentProps = JSON.parse(componentProps);
+  console.log('parsedComponentProps: %o', parsedComponentProps);
+
+
+  function fetchTranspiledJsx() {
+    return fetch('//localhost:8080/process', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ jsx: componentJsx }),
+    })
+      .then(resp => resp.json())
+      .then((json) => {
+        const { transpiledJsx } = json;
+        return transpiledJsx;
+      });
+  }
 
 
   useEffect(() => {
-    if (transpiledJsx) {
+    if (componentJsx) {
       // Component is a function so it ends up being executed
       // instead of just stored. we'll store it on an object
       // prop instead to avoid any confusion
-      setComponent({ Component: getComponentFromString(transpiledJsx, 'Demo') });
+      fetchTranspiledJsx()
+        .then((transpiledJsx) => {
+          setComponent({ Component: getComponentFromString(transpiledJsx, selectedChapter.id) });
+        });
     }
-  }, [transpiledJsx]);
+  }, [componentJsx]);
 
 
+  console.groupEnd();
   return (
     <section className="Stage">
       <div>
         {Component && (
-          <Component {...componentProps} />
+          <Component {...parsedComponentProps} />
         )}
       </div>
     </section>
   );
 }
+
+
+Stage.defaultProps = {
+  componentProps: '{}',
+};

@@ -32,3 +32,17 @@ export function setJsxProps(str) {
   };
 }
 
+export function setSelectedChapter(chapterName) {
+  return {
+    type: appConstants.SELECTED_CHAPTER_UPDATE,
+    payload: chapterName,
+  };
+}
+
+export function setSelectedStory(story) {
+  return {
+    type: appConstants.SELECTED_STORY_UPDATE,
+    payload: story,
+  };
+}
+

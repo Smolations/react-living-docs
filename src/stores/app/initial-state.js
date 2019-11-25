@@ -16,7 +16,11 @@ function Demo(props) {
 `;
 
 export default {
-  jsx: defaultJsx,
-  jsxProps: '{ "name": "Smola" }',
-  transpiledJsx: null,
+  // jsx: defaultJsx,
+  // jsxProps: '{ "name": "Smola" }',
+  jsx: '',
+  jsxProps: '',
+  selectedChapter: undefined,
+  selectedStory: undefined,
+  // transpiledJsx: '',
 };

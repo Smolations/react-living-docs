@@ -7,9 +7,12 @@ import * as components from 'components';
 import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-console.log('[getComponentFromString] Card.toString():\n%o', components.Card.toString())
+console.log('[getComponentFromString] components.Card.toString():\n%o', components.Card.toString())
 
 export default function getComponentFromString(str, componentName) {
+  console.groupCollapsed('[getComponentFromString]');
+  console.log('str: %o', str);
+  console.log('componentName: %o', componentName);
   // `globals`` and `stringGlobals` should mirror each other. the strings
   // are necessary as they are required when creating a new `Function`
   // from a string.
@@ -34,10 +37,11 @@ export default function getComponentFromString(str, componentName) {
   const componentNamePattern = new RegExp(`(?=function ${componentName})`);
 
   const scopedFunction = Function(...stringGlobals, str.replace(componentNamePattern, 'return '));
-  console.log('[getComponentFromString] scopedFunction:\n%o', scopedFunction.toString());
+  console.log('scopedFunction:\n%o', scopedFunction.toString());
 
   const Component = scopedFunction(...globals);
-  console.log('[getComponentFromString] Component:\n%o', Component);
+  console.log('Component:\n%o', Component);
 
+  console.groupEnd();
   return Component;
 }

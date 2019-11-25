@@ -1,6 +1,8 @@
 const babelTemplate = require('@babel/template').default;
 const babelTypes = require('@babel/types');
 
+const inspect = require('../inspect');
+
 
 function globalsTemplate(globals = []) {
   const objectProperties = globals.map((globalId) => {

@@ -40,7 +40,7 @@ function parseFiles({
   });
 
 
-  filePaths.forEach((filePath) => {
+  filePaths.forEach((filePath, ndx) => {
     console.log(`READING FILE:  ${filePath}`);
     console.log('------------------------------------------')
     const content = fs.readFileSync(filePath, { encoding: 'UTF-8' });
@@ -52,9 +52,13 @@ function parseFiles({
     // grab the ast for the story file
     const ast = babelRecastParse(content);
 
-    callback({ ast, story: { filePath, name: storyName } });
+    callback({
+      ast,
+      story: { filePath, name: storyName },
+      files: { total: filePaths.length, currentIndex: ndx },
+    });
 
-    logAstToCode(ast);
+    // logAstToCode(ast);
 
     console.log('\nEOF\n')
   });

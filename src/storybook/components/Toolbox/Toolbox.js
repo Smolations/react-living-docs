@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 // ace editor and themes, modes, etc
@@ -22,9 +23,11 @@ import './Toolbox.scss';
 
 
 export default function Toolbox(props) {
+  const { jsx, jsxProps } = props;
+
   const [jsxEditor, setJsxEditor] = useState(null);
   const [propsEditor, setPropsEditor] = useState(null);
-  const [{ app: { jsx, jsxProps } }, dispatch] = useGlobalStateValue();
+  const [, dispatch] = useGlobalStateValue();
 
   const jsxEditorId = 'jsxEditor';
   const propsEditorId = 'propsEditor';
@@ -41,7 +44,7 @@ export default function Toolbox(props) {
 
 
   function fetchTranspiledJsx() {
-    fetch('//localhost:8080/process', {
+    return fetch('//localhost:8080/process', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,21 +55,8 @@ export default function Toolbox(props) {
       .then(resp => resp.json())
       .then((json) => {
         const { transpiledJsx } = json;
-        dispatch(setTranspiledJsx(transpiledJsx));
+        return transpiledJsx;
       });
-  }
-
-
-  function handleReload() {
-    const newJsx = jsxEditor.getValue();
-    console.log('[Toolbox] newJsx: %o', newJsx);
-
-    const newJsxProps = propsEditor.getValue();
-    console.log('[Toolbox] newJsxProps: %o', newJsxProps);
-    const beautifiedProps = jsBeautify(newJsxProps, globalBeautifyOptions);
-
-    dispatch(setJsx(newJsx));
-    dispatch(setJsxProps(newJsxProps));
   }
 
 
@@ -84,6 +74,27 @@ export default function Toolbox(props) {
     propsEditor.getSession().setOptions(globalSessionOptions);
   }
 
+  function setEditorJsx(newJsx) {
+    jsxEditor && jsxEditor.getSession().setValue(jsx);
+  }
+
+  function setEditorProps(newProps) {
+    propsEditor && propsEditor.getSession().setValue(jsBeautify(jsxProps, globalBeautifyOptions));
+  }
+
+
+  function handleReload() {
+    const newJsx = jsxEditor.getValue();
+    console.log('[Toolbox] newJsx: %o', newJsx);
+
+    const newJsxProps = propsEditor.getValue();
+    console.log('[Toolbox] newJsxProps: %o', newJsxProps);
+    // const beautifiedProps = jsBeautify(newJsxProps, globalBeautifyOptions);
+
+    dispatch(setJsx(newJsx));
+    dispatch(setJsxProps(newJsxProps));
+  }
+
 
   // first, initialize the editors
   useEffect(() => {
@@ -97,8 +108,8 @@ export default function Toolbox(props) {
     if (jsxEditor && propsEditor) {
       setEditorOptions();
 
-      jsxEditor.getSession().setValue(jsx);
-      propsEditor.getSession().setValue(jsBeautify(jsxProps, globalBeautifyOptions));
+      setEditorJsx(jsx);
+      setEditorProps(jsxProps);
     }
   }, [jsxEditor, propsEditor]);
 
@@ -107,11 +118,16 @@ export default function Toolbox(props) {
   // is initially passed in, so the component will render
   // on page load
   useEffect(() => {
-    fetchTranspiledJsx();
+    if (jsx) {
+     setEditorJsx(jsx);
+     // fetchTranspiledJsx()
+     //  .then(transpiledJsx => dispatch(setTranspiledJsx(transpiledJsx)));
+    }
   }, [jsx]);
 
   useEffect(() => {
     console.log('[Toolbox] useEffect jsxProps changed: %o', jsxProps);
+    setEditorProps(jsxProps);
   }, [jsxProps]);
 
 

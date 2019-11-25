@@ -1,17 +1,59 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { useGlobalStateValue } from 'stores';
+import { setSelectedChapter, setSelectedStory } from 'stores/app/actions';
+
 import './Nav.scss';
 
 
 export default function Nav(props) {
   const { stories } = props;
 
+  const [{
+    app: {
+      selectedChapter = {},
+      selectedStory = {},
+    },
+  }, dispatch] = useGlobalStateValue();
+
+
+  function importStory(storyName, chapterName) {
+    return import(`storybook/stories/${storyName}`)
+      .then((storyModule) => {
+        const storyInstance = storyModule.default;
+        console.log('window.story instance: %o', storyInstance);
+        window.story = storyInstance;
+        dispatch(setSelectedStory(storyInstance));
+
+        if (chapterName) {
+          dispatch(setSelectedChapter(chapterName));
+        }
+      });
+  }
+
+
+  function handleChapterClick(story, chapter) {
+    console.log('[Nav handleChapterClick] story(%o)  chapter(%o)', story, chapter);
+    dispatch(setSelectedStory(story));
+    dispatch(setSelectedChapter(chapter));
+    // if (!selectedStory || selectedStory.id !== storyName) {
+    //   importStory(storyName, chapterId);
+    // }
+  }
+
+  function handleStoryClick(story) {
+    // probably just expand/contract chapter list...
+    console.log('[Nav handleStoryClick] story: %o', story);
+  }
+
 
   function renderChapters(story) {
-    return story.chapters.map((name) => (
-      <li>
-        {name}
+    return story.chapters.map((chapter) => (
+      <li key={`${story.id}-${chapter.id}`}>
+        <a href="#" onClick={() => handleChapterClick(story, chapter)}>
+          {chapter.title}
+        </a>
       </li>
     ));
   }
@@ -23,11 +65,13 @@ export default function Nav(props) {
         <h1>Storybook</h1>
       </header>
       <ul>
-        {stories.map(story => (
-          <li>
-            <h3>{story.name}</h3>
+        {Object.keys(stories).map((storyName, ndx) => (
+          <li key={`${storyName}${ndx}`}>
+            <a href="#" onClick={() => handleStoryClick(stories[storyName])}>
+              <h3>{storyName}</h3>
+            </a>
             <ul>
-              {renderChapters(story)}
+              {renderChapters(stories[storyName])}
             </ul>
           </li>
         ))}
@@ -38,5 +82,5 @@ export default function Nav(props) {
 
 
 Nav.propTypes = {
-  stories: PropTypes.array.isRequired,
+  stories: PropTypes.object.isRequired,
 };
