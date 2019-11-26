@@ -11,7 +11,7 @@ import {
   GlobalStateProvider,
   globalInitialState,
   globalReducer,
-} from '../stores';
+} from './stores';
 
 import './index.scss';
 
@@ -20,7 +20,7 @@ const appContainer = (
   <GlobalStateProvider initialState={globalInitialState} reducer={globalReducer}>
     <Router>
       <QueryParamProvider ReactRouterRoute={Route}>
-        <App />
+        <Route path="/" component={App} />
       </QueryParamProvider>
     </Router>
   </GlobalStateProvider>

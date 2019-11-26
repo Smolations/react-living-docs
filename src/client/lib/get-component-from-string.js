@@ -1,6 +1,8 @@
 // here we import all components that are documented in storybook. this
 // allows for the story components to use them in rendered markup.
-import * as components from 'components';
+// @todo this will need to be dynamic..or maybe copy given directory?
+// wait, is this needed?
+import * as components from '../../components';
 
 // these are core packages, utilities, etc., which will make them
 // accessible in story components.

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
-import getComponentFromString from 'storybook/lib/get-component-from-string';
+import getComponentFromString from 'lib/get-component-from-string';
 
 import { useGlobalStateValue } from 'stores';
 

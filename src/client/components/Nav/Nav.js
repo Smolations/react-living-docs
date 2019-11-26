@@ -27,28 +27,10 @@ export default function Nav(props) {
   const { path } = useRouteMatch();
 
 
-  function importStory(storyName, chapterName) {
-    return import(`storybook/stories/${storyName}`)
-      .then((storyModule) => {
-        const storyInstance = storyModule.default;
-        console.log('window.story instance: %o', storyInstance);
-        window.story = storyInstance;
-        dispatch(setSelectedStory(storyInstance));
-
-        if (chapterName) {
-          dispatch(setSelectedChapter(chapterName));
-        }
-      });
-  }
-
-
   function handleChapterClick(story, chapter) {
     console.log('[Nav handleChapterClick] story(%o)  chapter(%o)', story, chapter);
     dispatch(setSelectedStory(story));
     dispatch(setSelectedChapter(chapter));
-    // if (!selectedStory || selectedStory.id !== storyName) {
-    //   importStory(storyName, chapterId);
-    // }
   }
 
   function handleStoryClick(story) {
@@ -60,7 +42,7 @@ export default function Nav(props) {
   function renderChapters(story) {
     return story.chapters.map((chapter) => (
       <li key={`${story.id}-${chapter.id}`}>
-        <Link to={`${path}${story.id}`}>
+        <Link to={`/stories/${story.id}#${chapter.id}`}>
           {chapter.title}
         </Link>
       </li>

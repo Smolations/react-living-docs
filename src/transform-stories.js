@@ -16,8 +16,8 @@ const inspect = require(path.resolve(__dirname, './server/lib/inspect'));
 const logAstToCode = require(path.resolve(__dirname, './server/lib/log-ast-to-code'));
 
 
-
-const outputDir = path.resolve(__dirname, './storybook/stories');
+// this probs won't work for packaging...
+const outputDir = path.resolve(__dirname, './client/stories');
 
 parseFiles({
   patterns: path.resolve(__dirname, './components/**/*.story.js'),
@@ -94,7 +94,7 @@ parseFiles({
   const programVisitor = {
     Program: {
       exit(path) {
-        const storyImport = storyImportTemplate('storybook/lib/story');
+        const storyImport = storyImportTemplate('lib/story');
         const storyExport = storyExportTemplate();
 
         path.unshiftContainer('body', storyImport);

@@ -14,7 +14,7 @@ export default class Story {
     return this;
   }
 
-  findChapter(chapterName) {
-    return this.chapters.find(chapter => chapter.title === chapterName);
+  findChapter(chapterId) {
+    return this.chapters.find(chapter => chapter.id === chapterId);
   }
 }

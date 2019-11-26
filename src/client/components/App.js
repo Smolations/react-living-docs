@@ -10,7 +10,7 @@ import { useGlobalStateValue } from 'stores';
 
 import * as stories from '../stories';
 
-// import { Nav } from './Nav';
+import { Nav } from './Nav';
 // import { Stage } from './Stage';
 // import { Toolbox } from './Toolbox';
 
@@ -22,30 +22,30 @@ import './App.scss';
 
 console.log('[App] stories: %o', stories);
 export default function App() {
-  const [{
-    app: {
-      jsx,
-      jsxProps,
-      selectedChapter,
-      transpiledJsx,
-    },
-  }] = useGlobalStateValue();
+  // const [{
+  //   app: {
+  //     jsx,
+  //     jsxProps,
+  //     selectedChapter,
+  //     transpiledJsx,
+  //   },
+  // }] = useGlobalStateValue();
 
-  const componentName = selectedChapter ? selectedChapter.id : null;
+  // const componentName = selectedChapter ? selectedChapter.id : null;
 
 
   return (
-    <main className="App">
+    <div className="App">
       <Nav stories={stories} />
 
       <Switch>
         <Route exact path="/">
           <Splash />
         </Route>
-        <Route path="/:storyName">
-          <Storybook />
+        <Route path="/stories/:storyName">
+          <Storybook stories={stories} />
         </Route>
       </Switch>
-    </main>
+    </div>
   );
 }

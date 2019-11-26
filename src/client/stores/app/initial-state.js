@@ -19,7 +19,7 @@ export default {
   // jsx: defaultJsx,
   // jsxProps: '{ "name": "Smola" }',
   jsx: '',
-  jsxProps: '',
+  jsxProps: '{}',
   selectedChapter: undefined,
   selectedStory: undefined,
   // transpiledJsx: '',
