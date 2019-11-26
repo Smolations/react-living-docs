@@ -14,6 +14,9 @@ const devConfig = {
     host: '0.0.0.0',
     port: devPort,
     disableHostCheck: true,
+    // proxy: {
+    //   '/api': 'http://localhost:3000'
+    // }
   },
 
   entry: {

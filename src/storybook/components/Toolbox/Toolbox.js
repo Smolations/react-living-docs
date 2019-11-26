@@ -41,25 +41,6 @@ export default function Toolbox(props) {
   };
 
 
-
-
-  function fetchTranspiledJsx() {
-    return fetch('//localhost:8080/process', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ jsx }),
-    })
-      .then(resp => resp.json())
-      .then((json) => {
-        const { transpiledJsx } = json;
-        return transpiledJsx;
-      });
-  }
-
-
   function setEditorOptions() {
     const JavaScriptMode = ace.require('ace/mode/javascript').Mode;
     const JsonMode = ace.require('ace/mode/json').Mode;
@@ -89,7 +70,6 @@ export default function Toolbox(props) {
 
     const newJsxProps = propsEditor.getValue();
     console.log('[Toolbox] newJsxProps: %o', newJsxProps);
-    // const beautifiedProps = jsBeautify(newJsxProps, globalBeautifyOptions);
 
     dispatch(setJsx(newJsx));
     dispatch(setJsxProps(newJsxProps));
@@ -120,8 +100,6 @@ export default function Toolbox(props) {
   useEffect(() => {
     if (jsx) {
      setEditorJsx(jsx);
-     // fetchTranspiledJsx()
-     //  .then(transpiledJsx => dispatch(setTranspiledJsx(transpiledJsx)));
     }
   }, [jsx]);
 

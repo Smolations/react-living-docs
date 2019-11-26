@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {
+  // BrowserRouter as Router,
+  // Route,
+  Link,
+  useRouteMatch,
+} from 'react-router-dom';
 
 import { useGlobalStateValue } from 'stores';
 import { setSelectedChapter, setSelectedStory } from 'stores/app/actions';
@@ -8,6 +14,7 @@ import './Nav.scss';
 
 
 export default function Nav(props) {
+  console.log('[Nav] props: %o', props)
   const { stories } = props;
 
   const [{
@@ -16,6 +23,8 @@ export default function Nav(props) {
       selectedStory = {},
     },
   }, dispatch] = useGlobalStateValue();
+
+  const { path } = useRouteMatch();
 
 
   function importStory(storyName, chapterName) {
@@ -51,9 +60,9 @@ export default function Nav(props) {
   function renderChapters(story) {
     return story.chapters.map((chapter) => (
       <li key={`${story.id}-${chapter.id}`}>
-        <a href="#" onClick={() => handleChapterClick(story, chapter)}>
+        <Link to={`${path}${story.id}`}>
           {chapter.title}
-        </a>
+        </Link>
       </li>
     ));
   }

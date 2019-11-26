@@ -20,7 +20,7 @@ const appContainer = (
   <GlobalStateProvider initialState={globalInitialState} reducer={globalReducer}>
     <Router>
       <QueryParamProvider ReactRouterRoute={Route}>
-        <Route path="/" component={App} />
+        <App />
       </QueryParamProvider>
     </Router>
   </GlobalStateProvider>
