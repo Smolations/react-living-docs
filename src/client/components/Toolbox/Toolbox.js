@@ -109,11 +109,23 @@ export default function Toolbox(props) {
   }, [jsxProps]);
 
 
+  function handleEditorKeyDown(evt) {
+    const cmdHeld = evt.metaKey;
+    const ctrlHeld = evt.getModifierState('Control');
+    const enterPressed = evt.which === 13;
+
+    if ((cmdHeld && enterPressed) || (ctrlHeld && enterPressed)) {
+      handleReload();
+      true;
+    }
+  }
+
+
   return (
     <section className="Toolbox">
       <div id="editors">
-        <div id={jsxEditorId}></div>
-        <div id={propsEditorId}></div>
+        <div onKeyDown={handleEditorKeyDown} id={jsxEditorId}></div>
+        <div onKeyDown={handleEditorKeyDown} id={propsEditorId}></div>
       </div>
 
       <button type="button" style={{ float: 'right' }} onClick={handleReload}>

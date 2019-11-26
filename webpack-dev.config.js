@@ -11,12 +11,10 @@ const config = {
   mode: 'development',
 
   entry: {
-    main: path.join(clientPath, 'index.js'),
-    // main: [
-      // path.join(clientPath, 'index.js'),
-      // './src/client/index.js',
-      // 'webpack-hot-middleware/main?path=/__webpack_hmr&timeout=20000',
-    // ],
+    main: [
+      'webpack-hot-middleware/client?name=main&reload=true&timeout=2000',
+      path.join(clientPath, 'index.js'),
+    ],
   },
 
   output: {
@@ -113,7 +111,7 @@ const config = {
       template: path.join(clientPath, 'index.ejs'),
       excludeChunks: 'server',
     }),
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   optimization: {

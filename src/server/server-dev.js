@@ -4,9 +4,10 @@ import express from 'express';
 
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
-// import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import webpackDevConfig from '../../webpack-dev.config.js'
+
 
 // keep in mind this file gets transpiled and tossed
 // into the dist folder along with server.js
@@ -26,7 +27,7 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: webpackDevConfig.output.publicPath
 }));
 
-// app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 
 app.post('/process', (req, res) => {
