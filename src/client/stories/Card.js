@@ -1,15 +1,11 @@
 import Story from 'lib/story';
 import _ from 'lodash';
-import React, { useState, useEffect as uE } from 'react';
-import * as lo from 'lodash';
+import React from 'react';
 
 
 const globals = {
   _,
   React,
-  useState,
-  uE,
-  lo,
 };
 
 const story = new Story('Card', {

@@ -24,10 +24,19 @@ const compiler = webpack(webpackDevConfig);
 app.use(express.json());
 
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackDevConfig.output.publicPath
+  lazy: false,
+  publicPath: webpackDevConfig.output.publicPath,
+  // headers: { 'Access-Control-Allow-Origin': '*' },
 }));
 
-app.use(webpackHotMiddleware(compiler));
+app.use(
+  webpackHotMiddleware(compiler, {
+    // path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+    // noInfo: false,
+    quiet: false,
+  })
+);
 
 
 app.post('/process', (req, res) => {

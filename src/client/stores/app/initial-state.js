@@ -16,6 +16,7 @@ function Demo(props) {
 `;
 
 export default {
+  isInitialState: true,
   // jsx: defaultJsx,
   // jsxProps: '{ "name": "Smola" }',
   jsx: '',

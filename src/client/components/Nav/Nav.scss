@@ -1,11 +1,13 @@
 .Nav {
   position: fixed;
+  display: flex;
+  align-items: center;
   top: 0;
   left: 0;
-  bottom: 0;
-  width: $Nav-width;
+  right: 0;
+  height: $Nav-height;
 
-  padding: 1em;
+  padding: $Nav-padding;
 
   background-color: $green;
   border: 1px solid $green-shade-1;
@@ -14,7 +16,7 @@
 
   z-index: 10;
 
-  ul {
-    list-style: none;
+  .Typeahead {
+    max-width: 50%;
   }
 }

@@ -10,6 +10,9 @@ import {
 import { useGlobalStateValue } from 'stores';
 import { setSelectedChapter, setSelectedStory } from 'stores/app/actions';
 
+import { Typeahead } from '../Typeahead';
+
+
 import './Nav.scss';
 
 
@@ -19,12 +22,22 @@ export default function Nav(props) {
 
   const [{
     app: {
-      selectedChapter = {},
-      selectedStory = {},
+      isInitialState,
+      selectedChapter,
+      selectedStory,
     },
   }, dispatch] = useGlobalStateValue();
+  console.log('[Nav] isInitialState: %o', isInitialState)
 
   const { path } = useRouteMatch();
+
+  const storyKeys = Object.keys(stories);
+  const storyValues = Object.values(stories);
+  let chapterValues = [];
+
+  if (selectedStory) {
+    chapterValues = Object.values(selectedStory.chapters);
+  }
 
 
   function handleChapterClick(story, chapter) {
@@ -50,23 +63,43 @@ export default function Nav(props) {
   }
 
 
+  // we want the typeaheads to render with the correct default
+  // story, so we need to wait until it updates when the state's
+  // `selectedStory` is set based on the url. if it's not in the
+  // url, we can safely render without the default story.
   return (
     <nav className="Nav">
-      <header>
-        <h1>Storybook</h1>
-      </header>
-      <ul>
-        {Object.keys(stories).map((storyName, ndx) => (
-          <li key={`${storyName}${ndx}`}>
-            <a href="#" onClick={() => handleStoryClick(stories[storyName])}>
-              <h3>{storyName}</h3>
-            </a>
-            <ul>
-              {renderChapters(stories[storyName])}
-            </ul>
-          </li>
-        ))}
-      </ul>
+      {!isInitialState && (
+        <Typeahead
+          collection={storyValues}
+          filterCollection={(inputValue, story) => !inputValue || story.id.includes(inputValue)}
+          resultToString={story => story && story.id}
+          resultKey={(story, index) => story.id}
+          renderResult={(story, index) => (
+            <Link to={`/stories/${story.id}#${story.chapters[0].id}`}>
+              <p>{story.id}</p>
+            </Link>
+          )}
+          placeholder="StoryName"
+          defaultResult={selectedStory}
+        />
+      )}
+
+      {selectedStory && (
+        <Typeahead
+          collection={chapterValues}
+          filterCollection={(inputValue, chapter) => !inputValue || chapter.title.includes(inputValue)}
+          resultToString={chapter => chapter && chapter.title}
+          resultKey={(chapter, index) => chapter.id}
+          renderResult={(chapter, index) => (
+            <Link to={`/stories/${selectedStory.id}#${chapter.id}`}>
+              <p>{chapter.title}</p>
+            </Link>
+          )}
+          placeholder="Chapter"
+          defaultResult={selectedChapter}
+        />
+      )}
     </nav>
   );
 }

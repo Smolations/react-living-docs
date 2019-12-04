@@ -56,5 +56,5 @@ export default function appReducer(state, action) {
       newState = state;
   }
 
-  return newState;
+  return { ...newState, isInitialState: false };
 }

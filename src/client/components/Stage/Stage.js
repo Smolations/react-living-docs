@@ -51,7 +51,7 @@ export default function Stage(props) {
       // prop instead to avoid any confusion
       fetchTranspiledJsx()
         .then((transpiledJsx) => {
-          setComponent({ Component: getComponentFromString(transpiledJsx, selectedChapter.id) });
+          setComponent({ Component: getComponentFromString(transpiledJsx, selectedChapter) });
         });
     }
   }, [componentJsx]);

@@ -18,6 +18,8 @@ const logAstToCode = require(path.resolve(__dirname, './server/lib/log-ast-to-co
 
 // this probs won't work for packaging...
 const outputDir = path.resolve(__dirname, './client/stories');
+const storyIndexOutputFile = path.join(outputDir, 'index.js');
+const storyIndexExports = [];
 
 parseFiles({
   patterns: path.resolve(__dirname, './components/**/*.story.js'),
@@ -28,8 +30,6 @@ parseFiles({
 }) => {
 
   const storyOutputFile = path.join(outputDir, `${storyName}.js`);
-  const storyIndexOutputFile = path.join(outputDir, 'index.js');
-  const storyIndexExports = [];
   const importNames = [];
 
 
@@ -74,8 +74,6 @@ parseFiles({
         path.parentPath.replaceWithMultiple(chapter);
         defaultPropsExpr.remove();
       }
-
-      // chapterNames.push(path.node.id.name);
     },
   };
 
@@ -136,13 +134,6 @@ parseFiles({
     importDeclarationVisitor,
     exportDeclarationVisitor,
   ));
-
-  // const generatorOpts = {
-  //   generator: 'recast',
-  //   retainFunctionParens: true,
-  //   retainLines: true,
-  // };
-  // console.log(babelGenerate(ast, generatorOpts).code);
 
 
   fs.writeFileSync(storyOutputFile, babelRecastGenerate(ast));

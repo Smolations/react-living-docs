@@ -116,7 +116,6 @@ export default function Toolbox(props) {
 
     if ((cmdHeld && enterPressed) || (ctrlHeld && enterPressed)) {
       handleReload();
-      true;
     }
   }
 

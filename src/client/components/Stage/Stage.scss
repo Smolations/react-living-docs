@@ -1,8 +1,8 @@
 .Stage {
   height: 100%;
 
-  margin-left: $Nav-width;
-  padding: $Nav-margin $Nav-margin ($Nav-margin + $Toolbox-height) $Nav-margin;
+  // margin-left: $Nav-width;
+  padding: ($Nav-height + 2 * $Nav-padding + $Nav-margin) $Nav-margin ($Nav-margin + $Toolbox-height) $Nav-margin;
 
   background-color: $neutral-tint-1;
 

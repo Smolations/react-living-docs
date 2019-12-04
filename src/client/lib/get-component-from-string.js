@@ -4,39 +4,28 @@
 // wait, is this needed?
 import * as components from '../../components';
 
-// these are core packages, utilities, etc., which will make them
-// accessible in story components.
-import _ from 'lodash';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-console.log('[getComponentFromString] components.Card.toString():\n%o', components.Card.toString())
 
-export default function getComponentFromString(str, componentName) {
+export default function getComponentFromString(str, storyChapter) {
   console.groupCollapsed('[getComponentFromString]');
   console.log('str: %o', str);
-  console.log('componentName: %o', componentName);
+  console.log('storyChapter: %o', storyChapter);
+
   // `globals`` and `stringGlobals` should mirror each other. the strings
   // are necessary as they are required when creating a new `Function`
   // from a string.
-  const globals = [
-    _,
-    moment,
-    React,
-    useEffect,
-    useState,
-    ...Object.values(components),
-  ];
+  const stringGlobals = [...Object.keys(components)];
+  const globals = [...Object.values(components)];
 
-  const stringGlobals = [
-    '_',
-    'moment',
-    'React',
-    'useEffect',
-    'useState',
-    Object.keys(components),
-  ];
+  // ensuring no dupes; don't trust _.uniq to remove
+  // them properly...
+  Object.keys(storyChapter.globals).forEach((globalKey) => {
+    if (!stringGlobals.includes(globalKey)) {
+      stringGlobals.push(globalKey);
+      globals.push(storyChapter.globals[globalKey]);
+    }
+  });
 
-  const componentNamePattern = new RegExp(`(?=function ${componentName})`);
+  const componentNamePattern = new RegExp(`(?=function ${storyChapter.id})`);
 
   const scopedFunction = Function(...stringGlobals, str.replace(componentNamePattern, 'return '));
   console.log('scopedFunction:\n%o', scopedFunction.toString());

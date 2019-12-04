@@ -1,0 +1,164 @@
+$font-size: 3rem;
+$line-height: 3.2rem;
+
+$total-height: $line-height + 2rem;
+$controls-total-height: $line-height;
+
+$control-button-total-height: $total-height;
+$control-button-total-width: 5rem;
+$control-button-svg-height: $font-size;
+$control-button-svg-width: $control-button-svg-height;
+
+
+.Typeahead {
+  position: relative;
+
+  .Typeahead--control {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    padding: 0;
+
+    border-radius: 0.4rem;
+    border: none;
+
+    &:hover {
+      // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+      background-color: $Nav-bg-mask-color;
+      cursor: pointer;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: $control-button-total-height;
+      width: $control-button-total-width;
+      padding: 0;
+
+      background-color: transparent;
+      border: none;
+
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        svg {
+          opacity: 1;
+        }
+      }
+
+      svg {
+        height: $control-button-svg-height;
+        width: $control-button-svg-width;
+        margin: auto;
+        fill: $Nav-fg-color;
+        opacity: 0.8;
+      }
+    }
+
+    input {
+      flex-grow: 1;
+      height: $line-height;
+      padding: 0;
+
+      color: $Nav-fg-color;
+      background-color: transparent;
+
+      // overriding browser defaults
+      border: none;
+      font-family: inherit;
+      font-size: $font-size;
+      line-height: $line-height;
+
+      // caret-color: ;
+      outline: none;
+      cursor: pointer;
+
+      &::placeholder {
+        color: rgba($Nav-fg-color, 0.6);
+      }
+
+      &:focus {
+        &:not([value=""]) {
+          + button {
+            visibility: visible;
+          }
+        }
+      }
+
+      + button {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .Typeahead--results {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    max-height: 70vh;
+    margin-top: -2px;
+    padding: 0;
+
+    background-color: $Nav-fg-color;
+    // box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px 1px rgba(0, 0, 0, 0.2);
+    // outline: 1px solid mix($Nav-bg-color, $Nav-bg-mask-color);
+
+    overflow: auto;
+    scroll: auto;
+    z-index: 100;
+    -webkit-overflow-scrolling: touch;
+
+    li {
+      position: relative;
+      padding: (($total-height - $controls-total-height) / 2) $control-button-total-width;
+
+      background-color: $Nav-bg-mask-color;
+
+      color: $Nav-bg-color;
+      font-size: $font-size;
+
+      cursor: pointer;
+      list-style: none;
+    }
+  }
+
+
+  &.Typeahead--active {
+    .Typeahead--control {
+      background-color: $Nav-bg-mask-color;
+
+      input {
+        cursor: text;
+      }
+    }
+  }
+
+  &.Typeahead--is-open {
+    .Typeahead--results:not(:empty) {
+      // border: 1px solid $neutral-tint-3;
+      // border-top-color: $neutral-tint-2;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px;
+      // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.2), -1px -1px 0 0 rgba(0, 0, 0, 0.2);
+
+      li {
+        &.highlighted {
+          border-left: 1rem solid mix($Nav-bg-color, $Nav-bg-mask-color);
+          padding-left: $control-button-total-width - 1rem;
+        }
+
+        &.selected {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

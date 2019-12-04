@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// const ReactRefreshPlugin = require('@webhotelier/webpack-fast-refresh');
+const ReactRefreshPlugin = require('react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TimeFixPlugin = require('time-fix-plugin');
 
@@ -13,6 +15,7 @@ const config = {
   entry: {
     main: [
       'webpack-hot-middleware/client?name=main&reload=true&timeout=2000',
+      'whatwg-fetch',
       path.join(clientPath, 'index.js'),
     ],
   },
@@ -21,6 +24,7 @@ const config = {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js',
+    chunkFilename: '[name]-[chunkhash].js',
   },
 
   target: 'web',
@@ -45,6 +49,9 @@ const config = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
+              plugins: [
+                require.resolve('react-refresh/babel'),
+              ],
             },
           },
         ],
@@ -72,6 +79,20 @@ const config = {
           },
         ],
       },
+      // {
+        // test: /\.svg$/,
+        // loader: 'svg-inline-loader',
+        // loader: 'react-svg-loader',
+        // options: {
+        //   jsx: true, // true outputs JSX tags
+        //   svgo: {
+        //     plugins: [
+        //       { removeTitle: false },
+        //     ],
+        //     floatPrecision: 2,
+        //   },
+        // },
+      // },
       {
         test: /\.scss$/,
         use: [
@@ -112,10 +133,40 @@ const config = {
       excludeChunks: 'server',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin(),
   ],
 
   optimization: {
     noEmitOnErrors: true,
+    chunkIds: "named",
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: "initial",
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0 // This is example is too small to create commons chunks
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: "initial",
+          name: "vendor",
+          priority: 10,
+          enforce: true
+        },
+        // vendors: {
+        //   name: 'vendor',
+        //   minChunks: ({ resource }) => /node_modules/.test(resource),
+        //   // test: /[\\/]node_modules[\\/]/,
+        //   // priority: -10
+        // },
+        // common: {
+        //   name: 'common',
+        //   chunks: 'all',
+        //   minChunks: 2,
+        // },
+      },
+    },
   },
 };
 
