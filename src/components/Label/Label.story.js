@@ -14,7 +14,9 @@ export function LabelInCardHeader(props) {
       </Card.Head>
 
       <Card.Row>
-        <p>Sweet header label, eh?</p>
+        <Card.Col>
+          <p>Sweet header label, eh?</p>
+        </Card.Col>
       </Card.Row>
     </Card>
   );

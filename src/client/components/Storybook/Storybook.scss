@@ -1,0 +1,21 @@
+.Storybook {
+  position: relative;
+  display: flex;
+
+
+  height: calc(100% - #{$Nav-total-height});
+  margin-top: $Nav-total-height;
+
+  // margin-left: $Nav-width;
+  // padding: ($Nav-height + 2 * $Nav-padding + $Nav-margin) $Nav-margin ($Nav-margin + $Toolbox-height) $Nav-margin;
+
+  // background-color: $neutral-tint-1;
+
+  // > div {
+  //   height: 100%;
+  //   padding: 20px;
+  //   background-color: $white;
+  //   border: 1px solid $neutral-tint-2;
+  //   box-shadow: 0 0 4px $neutral-tint-2;
+  // }
+}

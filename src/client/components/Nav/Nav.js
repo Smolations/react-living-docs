@@ -69,7 +69,7 @@ export default function Nav(props) {
   // url, we can safely render without the default story.
   return (
     <nav className="Nav">
-      {!isInitialState && (
+      {(!isInitialState || true) && (
         <Typeahead
           collection={storyValues}
           filterCollection={(inputValue, story) => !inputValue || story.id.includes(inputValue)}
@@ -81,7 +81,7 @@ export default function Nav(props) {
             </Link>
           )}
           placeholder="StoryName"
-          defaultResult={selectedStory}
+          selectedResult={selectedStory || null}
         />
       )}
 
@@ -97,7 +97,7 @@ export default function Nav(props) {
             </Link>
           )}
           placeholder="Chapter"
-          defaultResult={selectedChapter}
+          selectedResult={selectedChapter}
         />
       )}
     </nav>

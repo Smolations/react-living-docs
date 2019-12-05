@@ -19,7 +19,7 @@ import './Typeahead.scss';
  *                                        as every element is of the same type. The other required props will define
  *                                        how the list/results will render.
  *  @prop {string}   [defaultInputValue]  A string with which to populate the input on initial render.
- *  @prop {*}        [defaultResult]      Setting a default result which will have appropriate styling in the given
+ *  @prop {*}        [selectedResult]     Setting a default result which will have appropriate styling in the given
  *                                        `collection` list.
  *  @prop {boolean}  [disabled]           Set this to `true` to disable the input.
  *  @prop {function} filterCollection     A function with the signature `(inputValue, result, index)` which defines
@@ -44,7 +44,7 @@ export default function Typeahead(props) {
   console.groupCollapsed('[Typeahead]');
   const {
     collection,
-    defaultResult,
+    selectedResult,
     filterCollection,
     onChange,
     onSelect,
@@ -57,6 +57,7 @@ export default function Typeahead(props) {
 
   const [inputRef] = useState(React.createRef());
   const [isActive, setIsActive] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(selectedResult);
 
   const [inputValueEdited, setInputValueEdited] = useState(false);
 
@@ -90,7 +91,10 @@ export default function Typeahead(props) {
     console.log('state: %o', state);
     console.log('changes: %o', changes);
 
-    let newChanges = { ...changes };
+    let newChanges = {
+      ...changes,
+      highlightedIndex: state.highlightedIndex,
+    };
 
 
     if (changes.isOpen) {
@@ -109,10 +113,21 @@ export default function Typeahead(props) {
         setInputValueEdited(true);
         break;
 
+      case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem: {
+        const highlightedIndex = collection.findIndex(item => item === state.selectedItem);
+
+        if (highlightedIndex !== -1) {
+          newChanges.highlightedIndex = highlightedIndex;
+        } else {
+          console.warn('[Typeahead] Unable to locate new selectedItem in the collection!');
+        }
+      } break;
+
       default:
         newChanges = changes;
     }
 
+    console.log('returning newChanges: %o', newChanges);
 
     console.groupEnd();
     return newChanges;
@@ -146,10 +161,6 @@ export default function Typeahead(props) {
     }
 
 
-
-
-
-      // .filter((...filterArgs) => !inputValue || filterCollection(inputValue, ...filterArgs))
     console.log('returning: %o', results)
     console.groupEnd();
     return results;
@@ -182,7 +193,7 @@ export default function Typeahead(props) {
   // `(result, downshiftProps)` and the test only needs the result.
   function handleResultClick(result) {
     console.log('result click')
-    // setSelectedItem(result);
+    setSelectedItem(result);
     onSelect(result);
   }
 
@@ -274,9 +285,11 @@ export default function Typeahead(props) {
       highlightedIndex,
 
       inputValue,
+      itemToString,
       isOpen,
       selectedItem,
     } = downshiftProps;
+    console.log('[Typeahead renderMenuItems] highlightedIndex: %o', highlightedIndex)
 
     let menuItems = null;
 
@@ -297,6 +310,7 @@ export default function Typeahead(props) {
                 item: result,
                 index,
                 className: liClasses,
+                title: itemToString(result),
               })}
             >
               {renderResult(result, index)}
@@ -337,14 +351,14 @@ export default function Typeahead(props) {
   useEffect(() => {
     // defaultInputValue && setInputValue(defaultInputValue);
 
-    if (defaultResult) {
-      // window.defaultResult = defaultResult;
+    if (selectedResult) {
+      // window.selectedResult = selectedResult;
       // window.collection = collection;
-      // const itemIndex = collection.findIndex(item => item === defaultResult);
+      // const itemIndex = collection.findIndex(item => item === selectedResult);
       // setHighlightedIndex(itemIndex);
-      // setSelectedItem(defaultResult);
+      setSelectedItem(selectedResult);
     }
-  }, [defaultResult]);
+  }, [selectedResult]);
 
 
   console.groupEnd();
@@ -358,7 +372,7 @@ export default function Typeahead(props) {
       // onStateChange={handleStateChange}
   return (
     <Downshift
-      initialSelectedItem={defaultResult}
+      selectedItem={selectedItem}
       stateReducer={stateReducer}
       onSelect={handleResultSelect}
 
@@ -376,7 +390,7 @@ Typeahead.displayName = 'Typeahead';
 Typeahead.propTypes = {
   collection: PropTypes.arrayOf(PropTypes.any),
   defaultInputValue: PropTypes.string,
-  defaultResult: PropTypes.any,
+  selectedResult: PropTypes.any,
   disabled: PropTypes.bool,
   filterCollection: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,

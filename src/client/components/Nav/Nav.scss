@@ -9,14 +9,19 @@
 
   padding: $Nav-padding;
 
-  background-color: $green;
-  border: 1px solid $green-shade-1;
-  box-shadow: 3px 0 3px $green-tint-2;
-  color: $white;
+  background-color: $Nav-bg-color;
+  border: 1px solid $Nav-border-color;
+  box-shadow: 3px 0 3px $Nav-shadow-color;
+  color: $Nav-fg-color;
 
   z-index: 10;
 
   .Typeahead {
     max-width: 50%;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 }

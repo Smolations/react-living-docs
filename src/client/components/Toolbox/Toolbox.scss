@@ -1,18 +1,22 @@
 .Toolbox {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: relative;
+  // position: fixed;
+  // right: 0;
+  // bottom: 0;
+  // top: $Nav-height + 2 * $Nav-padding;
 
-  height: $Toolbox-height;
-  padding: $Nav-margin $Nav-margin $Nav-margin ($Nav-margin + $Nav-width);
+  // height: calc(100% - ($Nav-height - 2 * $Nav-padding));
+  height: calc(100% - 2 * #{$Toolbox-padding});
+  width: $Toolbox-width;
+  padding: $Toolbox-padding;
 
-  background-color: $white;
+  background-color: $Stage-bg-color;
   border: 1px solid $neutral-tint-3;
-  box-shadow: 0 -3px 3px $neutral-tint-2;
+  // box-shadow: 0 -3px 3px $neutral-tint-2;
 
   #editors {
     display: flex;
+    flex-direction: column;
     position: relative;
     width: 100%;
     height: 100%;

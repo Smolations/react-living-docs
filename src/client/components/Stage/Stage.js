@@ -21,6 +21,7 @@ export default function Stage(props) {
   console.log('selectedChapter: %o', selectedChapter);
 
   const [{ Component }, setComponent] = useState({});
+  const [isLoadingTranspiledJsx, setIsLoadingTranspiledJsx] = useState(false);
   console.log('Component: %o', Component);
 
   const parsedComponentProps = JSON.parse(componentProps);
@@ -28,6 +29,8 @@ export default function Stage(props) {
 
 
   function fetchTranspiledJsx() {
+    setIsLoadingTranspiledJsx(true);
+
     return fetch('//localhost:8080/process', {
       method: 'POST',
       headers: {
@@ -39,6 +42,9 @@ export default function Stage(props) {
       .then(resp => resp.json())
       .then((json) => {
         const { transpiledJsx } = json;
+
+        setIsLoadingTranspiledJsx(false);
+
         return transpiledJsx;
       });
   }
@@ -61,7 +67,7 @@ export default function Stage(props) {
   return (
     <section className="Stage">
       <div>
-        {Component && (
+        {!isLoadingTranspiledJsx && Component && (
           <Component {...parsedComponentProps} />
         )}
       </div>

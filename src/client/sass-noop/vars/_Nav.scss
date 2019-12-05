@@ -1,8 +1,11 @@
 $Nav-height: 7rem;
-$Nav-width: 15rem;
+// $Nav-width: 15rem;
 $Nav-margin: 2rem;
 $Nav-padding: 1rem;
+$Nav-total-height: $Nav-height + 2* $Nav-padding;
 
 $Nav-fg-color: $white;
 $Nav-bg-color: $green;
+$Nav-border-color: $green-shade-1;
+$Nav-shadow-color: $green-tint-2;
 $Nav-bg-mask-color: rgba(255, 255, 255, 0.15);

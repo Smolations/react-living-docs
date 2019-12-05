@@ -126,6 +126,14 @@ $control-button-svg-width: $control-button-svg-height;
 
       cursor: pointer;
       list-style: none;
+
+      // this is probably not sustainable, or even wanted
+      // by other users...
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 

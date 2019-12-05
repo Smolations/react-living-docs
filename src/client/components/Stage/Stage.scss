@@ -1,14 +1,16 @@
 .Stage {
-  height: 100%;
-
+  flex-grow: 1;
+  position: relative;
+  height: calc(100% - 2 * #{$Stage-padding});
   // margin-left: $Nav-width;
-  padding: ($Nav-height + 2 * $Nav-padding + $Nav-margin) $Nav-margin ($Nav-margin + $Toolbox-height) $Nav-margin;
+  padding: $Stage-padding;
 
-  background-color: $neutral-tint-1;
+  background-color: $Stage-bg-color;
 
   > div {
-    height: 100%;
-    padding: 20px;
+    height: calc(100% - 2 * #{$Stage-padding});
+    padding: 2 * $Stage-padding;
+
     background-color: $white;
     border: 1px solid $neutral-tint-2;
     box-shadow: 0 0 4px $neutral-tint-2;

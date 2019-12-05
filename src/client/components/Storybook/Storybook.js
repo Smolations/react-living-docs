@@ -15,6 +15,9 @@ import { Toolbox } from '../Toolbox';
 import { setSelectedChapter, setSelectedStory } from 'stores/app/actions';
 
 
+import './Storybook.scss';
+
+
 export default function Storybook(props) {
   const { stories } = props;
   const [{
