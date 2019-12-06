@@ -59,16 +59,17 @@ parseFiles({
         const code = babelRecastGenerate(node);
         const defaultPropsExpr = path.parentPath.getNextSibling();
         let defaultPropsObjExpr;
+        let props;
 
         if (defaultPropsExpr.isExpressionStatement()) {
-          defaultPropsObjExpr = defaultPropsExpr.node.expression.right;
+          props = babelRecastGenerate(defaultPropsExpr.node.expression.right);
         }
 
         const chapter = storyChapterTemplate({
           scope: path.scope.parent,
           title: node.id.name,
-          props: defaultPropsObjExpr,
           code,
+          props,
         });
 
         path.parentPath.replaceWithMultiple(chapter);

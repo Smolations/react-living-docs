@@ -38,6 +38,7 @@ export default function Toolbox(props) {
 
   const globalBeautifyOptions = {
     indent_size: 2,
+    e4x: true,
   };
 
 
@@ -49,18 +50,19 @@ export default function Toolbox(props) {
     propsEditor.setTheme(editorTheme);
 
     jsxEditor.session.setMode(new JavaScriptMode());
-    propsEditor.session.setMode(new JsonMode());
+    // propsEditor.session.setMode(new JsonMode());
+    propsEditor.session.setMode(new JavaScriptMode());
 
     jsxEditor.getSession().setOptions(globalSessionOptions);
     propsEditor.getSession().setOptions(globalSessionOptions);
   }
 
   function setEditorJsx(newJsx) {
-    jsxEditor && jsxEditor.getSession().setValue(jsx);
+    jsxEditor && jsxEditor.getSession().setValue(newJsx.trim());
   }
 
   function setEditorProps(newProps) {
-    propsEditor && propsEditor.getSession().setValue(jsBeautify(jsxProps, globalBeautifyOptions));
+    propsEditor && propsEditor.getSession().setValue(jsBeautify(newProps, globalBeautifyOptions));
   }
 
 
@@ -87,7 +89,6 @@ export default function Toolbox(props) {
   useEffect(() => {
     if (jsxEditor && propsEditor) {
       setEditorOptions();
-
       setEditorJsx(jsx);
       setEditorProps(jsxProps);
     }

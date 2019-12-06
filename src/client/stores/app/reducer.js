@@ -32,7 +32,7 @@ export default function appReducer(state, action) {
         ...state,
         selectedChapter: payload,
         jsx: payload.code,
-        jsxProps: JSON.stringify(payload.props),
+        jsxProps: payload.props,
       };
     } break;
 

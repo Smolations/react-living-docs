@@ -6,23 +6,18 @@ const camelCase = require('lodash/camelCase');
 function storyChapterTemplate({
   scope,
   title,
-  props,
+  props = '{}',
   code,
 }) {
   const idLiteral = babelTypes.stringLiteral(title);
   const titleLiteral = babelTypes.stringLiteral(startCase(title));
   const propsId = scope.generateUidIdentifier('chapterProps');
   const chapterId = scope.generateUidIdentifier('chapterCode');
-  let propsObjExpr = props;
-
-  if (!props) {
-    propsObjExpr = babelTypes.objectExpression([]);
-  }
 
   const tmpl = babelTemplate(`
-    const PROPS_UID = PROPS;
+    const PROPS_UID = \`${props}\`;
 
-    const CHAPTER_UID = \`\n${code}\n\`;
+    const CHAPTER_UID = \`${code}\`;
 
     story.addChapter({
       id: ID,
@@ -36,7 +31,6 @@ function storyChapterTemplate({
     ID: idLiteral,
     TITLE: titleLiteral,
     PROPS_UID: propsId,
-    PROPS: propsObjExpr,
     CHAPTER_UID: chapterId,
   });
 

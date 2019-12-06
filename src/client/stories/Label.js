@@ -13,12 +13,11 @@ const story = new Story('Label', {
   globals,
 });
 
-const _chapterProps = {
+const _chapterProps = `{
   label: 'Totes Labeled',
-};
+}`;
 
-const _chapterCode = `
-function LabelInCardHeader(props) {
+const _chapterCode = `function LabelInCardHeader(props) {
   return (
     <Card>
       <Card.Head>
@@ -26,12 +25,13 @@ function LabelInCardHeader(props) {
       </Card.Head>
 
       <Card.Row>
-        <p>Sweet header label, eh?</p>
+        <Card.Col>
+          <p>Sweet header label, eh?</p>
+        </Card.Col>
       </Card.Row>
     </Card>
   );
-}
-`;
+}`;
 
 story.addChapter({
   id: 'LabelInCardHeader',

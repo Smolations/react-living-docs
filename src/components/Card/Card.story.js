@@ -17,6 +17,7 @@ export function EmptyCard(props) {
 
 EmptyCard.defaultProps = {
   kind: 'awesome',
+  stuff: (<div>hi</div>),
 };
 
 

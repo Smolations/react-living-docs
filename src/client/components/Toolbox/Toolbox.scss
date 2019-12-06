@@ -1,9 +1,5 @@
 .Toolbox {
   position: relative;
-  // position: fixed;
-  // right: 0;
-  // bottom: 0;
-  // top: $Nav-height + 2 * $Nav-padding;
 
   // height: calc(100% - ($Nav-height - 2 * $Nav-padding));
   height: calc(100% - 2 * #{$Toolbox-padding});
@@ -11,7 +7,7 @@
   padding: $Toolbox-padding;
 
   background-color: $Stage-bg-color;
-  border: 1px solid $neutral-tint-3;
+  // border: 1px solid $neutral-tint-3;
   // box-shadow: 0 -3px 3px $neutral-tint-2;
 
   #editors {
@@ -28,3 +24,5 @@
     }
   }
 }
+
+

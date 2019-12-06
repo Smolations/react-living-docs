@@ -10,7 +10,7 @@ import { useGlobalStateValue } from 'stores';
 
 // import { Nav } from '../Nav';
 import { Stage } from '../Stage';
-import { Toolbox } from '../Toolbox';
+import { Toolbox, ToolboxDragHandle } from '../Toolbox';
 
 import { setSelectedChapter, setSelectedStory } from 'stores/app/actions';
 
@@ -41,11 +41,11 @@ export default function Storybook(props) {
 
   useEffect(() => {
     const story = stories[storyName];
-    console.log('set selected story: %o', story)
+    console.log('[Storybook] set selected story: %o', story)
     dispatch(setSelectedStory(story));
 
     if (chapterId) {
-      console.log('set selected chapter(%o): %o', chapterId, story.findChapter(chapterId))
+      console.log('[Storybook] set selected chapter(%o): %o', chapterId, story.findChapter(chapterId))
       dispatch(setSelectedChapter(story.findChapter(chapterId)));
     }
   }, [storyName, chapterId]);
@@ -54,6 +54,7 @@ export default function Storybook(props) {
   return (
     <main className="Storybook">
       <Stage componentJsx={jsx} componentProps={jsxProps} />
+      <ToolboxDragHandle />
       <Toolbox jsx={jsx} jsxProps={jsxProps} />
     </main>
   );

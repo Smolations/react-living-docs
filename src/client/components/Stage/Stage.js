@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import getComponentFromString from 'lib/get-component-from-string';
+import getComponentPropsFromString from 'lib/get-component-props-from-string';
 
 import { useGlobalStateValue } from 'stores';
 
@@ -21,11 +22,12 @@ export default function Stage(props) {
   console.log('selectedChapter: %o', selectedChapter);
 
   const [{ Component }, setComponent] = useState({});
+  const [ComponentProps, setComponentProps] = useState({});
   const [isLoadingTranspiledJsx, setIsLoadingTranspiledJsx] = useState(false);
   console.log('Component: %o', Component);
 
-  const parsedComponentProps = JSON.parse(componentProps);
-  console.log('parsedComponentProps: %o', parsedComponentProps);
+  // const parsedComponentProps = JSON.parse(componentProps);
+  // console.log('parsedComponentProps: %o', parsedComponentProps);
 
 
   function fetchTranspiledJsx() {
@@ -49,6 +51,28 @@ export default function Stage(props) {
       });
   }
 
+  function fetchTranspiledJsxProps() {
+    setIsLoadingTranspiledJsx(true);
+
+    return fetch('//localhost:8080/process', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      // body: JSON.stringify({ jsx: componentProps }),
+      body: JSON.stringify({ jsx: `var props = ${componentProps}` }),
+    })
+      .then(resp => resp.json())
+      .then((json) => {
+        const { transpiledJsx } = json;
+
+        setIsLoadingTranspiledJsx(false);
+
+        return transpiledJsx.replace(/^[^{]*(?={)/, '');
+      });
+  }
+
 
   useEffect(() => {
     if (componentJsx) {
@@ -59,6 +83,12 @@ export default function Stage(props) {
         .then((transpiledJsx) => {
           setComponent({ Component: getComponentFromString(transpiledJsx, selectedChapter) });
         });
+
+      fetchTranspiledJsxProps()
+        .then((transpiledJsxProps) => {
+          console.log('propsObj = %o', getComponentPropsFromString(transpiledJsxProps, selectedChapter))
+          setComponentProps(getComponentPropsFromString(transpiledJsxProps, selectedChapter));
+        });
     }
   }, [componentJsx]);
 
@@ -68,7 +98,7 @@ export default function Stage(props) {
     <section className="Stage">
       <div>
         {!isLoadingTranspiledJsx && Component && (
-          <Component {...parsedComponentProps} />
+          <Component {...ComponentProps} />
         )}
       </div>
     </section>

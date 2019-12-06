@@ -1,0 +1,10 @@
+#ToolboxDragHandle {
+  width: 0.5rem;
+  height: 100%;
+
+  background-color: $neutral-tint-3;
+  border-left: 1px solid $neutral-tint-4;
+  border-right: 1px solid $neutral-tint-4;
+
+  cursor: ew-resize;
+}

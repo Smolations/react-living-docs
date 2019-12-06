@@ -12,12 +12,12 @@ const story = new Story('Card', {
   globals,
 });
 
-const _chapterProps = {
+const _chapterProps = `{
   kind: 'awesome',
-};
+  stuff: (<div>hi</div>),
+}`;
 
-const _chapterCode = `
-function EmptyCard(props) {
+const _chapterCode = `function EmptyCard(props) {
   const kind = _.camelCase(props.kind);
 
   return (
@@ -25,8 +25,7 @@ function EmptyCard(props) {
       I am an {kind} Card.
     </Card>
   );
-}
-`;
+}`;
 
 story.addChapter({
   id: 'EmptyCard',
@@ -35,10 +34,9 @@ story.addChapter({
   code: _chapterCode,
 });
 
-const _chapterProps2 = {};
+const _chapterProps2 = `{}`;
 
-const _chapterCode2 = `
-function CardWithHeader(props) {
+const _chapterCode2 = `function CardWithHeader(props) {
   return (
     <Card>
       <Card.Head>
@@ -48,8 +46,7 @@ function CardWithHeader(props) {
       Otherwise, I am empty.
     </Card>
   );
-}
-`;
+}`;
 
 story.addChapter({
   id: 'CardWithHeader',
