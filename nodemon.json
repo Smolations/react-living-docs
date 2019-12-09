@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "watch": [
+    "src/components"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

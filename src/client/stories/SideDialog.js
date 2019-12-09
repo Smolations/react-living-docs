@@ -1,14 +1,27 @@
+import Story from 'lib/story';
 import React from 'react';
 
-import { SideDialog } from './SideDialog';
+const globals = {
+  React,
+};
 
+const story = new Story('SideDialog', {
+  globals,
+});
 
-export function SideDialogInContainer(props) {
+const _chapterProps = `{}`;
+
+const _chapterCode = `function SideDialogInContainer(props) {
   const containerStyles = {
-    position: 'relative';
-    height: '200px';
-    border: '1px solid gray';
+    position: 'relative',
+    height: '200px',
+    border: '1px solid gray',
   };
+
+
+  function handleClick(evt) {
+    console.log('click!');
+  }
 
 
   return (
@@ -32,4 +45,13 @@ export function SideDialogInContainer(props) {
       </SideDialog>
     </div>
   );
-}
+}`;
+
+story.addChapter({
+  id: 'SideDialogInContainer',
+  title: 'Side Dialog In Container',
+  props: _chapterProps,
+  code: _chapterCode,
+});
+
+export default story;

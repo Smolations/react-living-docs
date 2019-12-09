@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Flex } from '../Flex';
+
 import './Card.scss';
 
 
@@ -21,6 +23,7 @@ export default function Card(props) {
     dataIndex,
     dataType,
     secondary,
+    wide,
   } = props;
 
   // temporary name since .Card is taken
@@ -28,20 +31,24 @@ export default function Card(props) {
 
   className && classes.push(...className.split(' '));
   secondary && classes.push('Card--secondary');
+  wide && classes.push('Card--wide');
 
   return (
-    <div
+    <Flex
       className={classes.join(' ')}
-      data-group={dataGroup}
-      data-component="card"
-      data-index={dataIndex}
-      data-type={dataType}
+      dataGroup={dataGroup}
+      dataComponent="Card"
+      dataIndex={dataIndex}
+      dataType={dataType}
+      flexDirection="column"
     >
       {children}
-    </div>
+    </Flex>
   );
 }
 
+
+Card.displayName = 'Card';
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
@@ -50,4 +57,11 @@ Card.propTypes = {
   dataIndex: PropTypes.string,
   dataType: PropTypes.string,
   secondary: PropTypes.bool,
+  wide: PropTypes.bool,
+  ...Flex.flexPropTypes,
+};
+
+Card.defaultProps = {
+  secondary: false,
+  wide: false,
 };

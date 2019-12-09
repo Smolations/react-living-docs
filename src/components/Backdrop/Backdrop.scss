@@ -1,0 +1,24 @@
+.Backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  background-color: rgba(56, 56, 56, 0.7);
+  opacity: 0;
+
+  pointer-events: none;
+  z-index: 1000;
+
+  transition: opacity 0.2s linear;
+
+  &.Backdrop--open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}

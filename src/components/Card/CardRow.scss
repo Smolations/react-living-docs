@@ -1,23 +1,23 @@
+@import '../vars';
+
 .CardRow {
-  position: relative;
-  display: flex;
-  flex: 1;
+  padding: 0;
 
   + .CardRow {
-    border-top: 1px solid $Card-sep-color;
+    border-top: 1px solid $card-sep-color;
   }
 
-  + .Card-row--empty {
+  + .CardRow--empty {
     margin: -10px 0 -20px;
   }
 
   + .CardRow--soft {
     border-top: 0;
-    margin-top: -$Card-spacing;
+    margin-top: -$card-spacing;
   }
 
   &.CardRow--soft {
-    .Card-col {
+    .CardCol {
       border-color: transparent;
     }
   }
@@ -25,11 +25,6 @@
   &.is-editing {
     background-color: $neutral-tint-1;
     transition: background-color 0.3s ease-in-out;
-  }
-
-  .CardCol ul {
-    padding-left: 16px;
-    margin-bottom: 0px;
   }
 }
 

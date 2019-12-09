@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Flex, pickFlexProps } from '../Flex';
+
 import './CardCol.scss';
 
 
@@ -9,38 +11,51 @@ import './CardCol.scss';
  *
  *  @param {string}  className Additional classes to pass to the wrapper.
  *  @param {string}  grow      Adds a class to signify the row is empty?
- *  @param {boolean} min       Adds a class that resets flex settings.
+ *  @param {boolean} slim      Adds a class that changes the vertical padding.
  *  @param {boolean} soft      Adds a class to soften the look of the card row.
  */
 export default function CardCol(props) {
   const {
     children,
     className,
-    grow,
-    min,
+    dangling,
+    slim,
     soft,
   } = props;
 
   const classes = ['CardCol'];
+  const { flexItemProps } = pickFlexProps(props);
 
   className && classes.push(...className.split(' '));
-  grow && classes.push(`u-flexGrow ${grow}`);
-  min && classes.push('Col--min'); // don't even ask...it _will_ be rectified
+  slim && classes.push('CardCol--slim');
   soft && classes.push('CardCol--soft');
+  dangling && classes.push('CardCol--dangling');
 
 
   return (
-    <div className={classes.join(' ')}>
+    <Flex.Item
+      className={classes.join(' ')}
+      {...flexItemProps}
+    >
       {children}
-    </div>
+    </Flex.Item>
   );
 }
 
 
+CardCol.displayName = 'CardCol';
+
 CardCol.propTypes = {
   children: PropTypes.node, // should be required, but we'll wait until Card is flexed
-  className: PropTypes.bool,
-  grow: PropTypes.string,
-  min: PropTypes.bool,
+  className: PropTypes.string,
+  dangling: PropTypes.bool,
+  slim: PropTypes.bool,
   soft: PropTypes.bool,
+  ...Flex.Item.flexPropTypes,
+};
+
+CardCol.defaultProps = {
+  dangling: false,
+  slim: false,
+  soft: false,
 };

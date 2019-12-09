@@ -1,41 +1,55 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import DialogBackdrop from './DialogBackdrop';
+import { Backdrop } from '../Backdrop';
+
+import './Dialog.scss';
 
 
 export default function Dialog(props) {
   const {
-    parent,
     children,
+    className,
+    onClose,
+    open,
   } = props;
 
-  const rootNode = parent ? parent : document.querySelector('body');
+  const classes = classNames('Dialog', {
+    'Dialog--open': open,
+  }, className);
 
-  const [dialogElement] = useState(document.createElement('article'));
+  const [showBackdrop, setShowBackdrop] = useState(!!open);
 
-  dialogElement.className = 'Dialog';
+
+  function handleBackdropClick() {
+    setShowBackdrop(false);
+    onClose();
+  }
 
 
   useEffect(() => {
-    rootNode.appendChild(dialogElement);
-
-    return () => rootNode.removeChild(dialogElement);
-  }, []);
+    open && setShowBackdrop(true);
+  }, [open]);
 
 
-  return ReactDOM.createPortal(
-    children,
-    dialogElement,
+  return (
+    <Backdrop show={showBackdrop} onClick={handleBackdropClick} fullScreen>
+      {open && (
+        <div className={classes}>
+          {children}
+        </div>
+      )}
+    </Backdrop>
   );
-
-  // return (
-  //   <article className="Dialog">
-  //     {children}
-  //   </article>
-  // );
 }
 
 
-Dialog.propTypes = {};
+Dialog.propTypes = {
+  onClose: PropTypes.func,
+};
+
+Dialog.defaultProps = {
+  onClose: () => {},
+};

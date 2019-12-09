@@ -55,10 +55,9 @@ parseFiles({
   const chapterFunctionVisitor = {
     FunctionDeclaration(path) {
       if (path.parentPath.isExportNamedDeclaration()) {
-        const { node } = path;
+        const { node } = path;console.log('found chapter: '+node.id.name)
         const code = babelRecastGenerate(node);
         const defaultPropsExpr = path.parentPath.getNextSibling();
-        let defaultPropsObjExpr;
         let props;
 
         if (defaultPropsExpr.isExpressionStatement()) {
@@ -73,7 +72,7 @@ parseFiles({
         });
 
         path.parentPath.replaceWithMultiple(chapter);
-        defaultPropsExpr.remove();
+        props && defaultPropsExpr.remove();
       }
     },
   };

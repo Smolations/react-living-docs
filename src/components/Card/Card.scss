@@ -1,19 +1,18 @@
+@import '../vars';
+
 // might be a good idea to eventually make this a flex layout...
 .Card2 {
-  display: block;
-  position: relative;
   background-color: $white;
   border-radius: 3px;
-  border: 1px solid $Card-border-color;
+  border: 1px solid $card-border-color;
   box-shadow: 0 1px 0 $neutral-tint-2;
 
   // this looks to be custom styling for a specific view,
   // so these should eventually move to that view's stylesheet.
   &.choose-a-plan-card {
-    position: relative;
     padding-bottom: 73px;
 
-    .Card-head {
+    .CardHead {
       height: 102px;
     }
 
@@ -28,7 +27,7 @@
   &.Card--inner {
     margin: 20px;
 
-    .Card-head {
+    .CardHead {
       background: $neutral-tint-2;
     }
   }
@@ -53,8 +52,9 @@
     box-shadow: none;
   }
 
-  + .Card2 {
-    margin-top: $Page-main-spacing;
+  + .Card2,
+  + .Card {
+    margin-top: $page-main-spacing;
   }
 
   // used only in HPP; consider deprecation in favor
@@ -77,10 +77,11 @@
     max-width: 460px;
   }
 
+  // this is not a great style in general...
   &.Card--wide {
-    box-shadow: none;
-    padding-left: 15px;
     width: 600px;
+    padding: 0; // some global .Card--wide style is messing with padding
+    box-shadow: none;
     border-color: transparent;
   }
 }
@@ -102,6 +103,6 @@
 .Card-foot {
   display: block;
   margin: 0;
-  padding: $Card-spacing;
-  border-top: 1px solid $Card-sep-color;
+  padding: $card-spacing;
+  border-top: 1px solid $card-sep-color;
 }

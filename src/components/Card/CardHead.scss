@@ -1,8 +1,9 @@
+@import '../vars';
+
 .CardHead {
-  position: relative;
-  margin: $CardHead-vertical-margin $CardHead-horizontal-margin;
-  padding: $CardHead-vertical-padding $CardHead-horizontal-padding;
-  border-bottom: 1px solid $Card-border-color;
+  margin: $card-head-vertical-margin $card-head-horizontal-margin;
+  padding: $card-head-vertical-padding $card-head-horizontal-padding;
+  border-bottom: 1px solid $card-border-color;
   font-size: 15px;
   font-weight: 600;
 
@@ -31,7 +32,7 @@
     padding-left: 0.5em;
     padding-right: 0.75em;
     background-color: $white;
-    border: 1px solid $Card-border-color;
+    border: 1px solid $card-border-color;
     border-radius: 3px;
     color: $green;
     font-weight: 400;

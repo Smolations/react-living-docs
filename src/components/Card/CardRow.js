@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Flex, pickFlexProps } from '../Flex';
+
 import './CardRow.scss';
 
 
@@ -15,11 +17,14 @@ export default function CardRow(props) {
   const {
     children,
     className,
+    cols,
     empty,
     soft,
   } = props;
 
   const classes = ['CardRow'];
+  const { flexContainerProps, flexItemProps } = pickFlexProps(props);
+
 
   className && classes.push(...className.split(' '));
   soft && classes.push('CardRow--soft');
@@ -27,16 +32,30 @@ export default function CardRow(props) {
 
 
   return (
-    <div className={classes.join(' ')}>
+    <Flex
+      className={classes.join(' ')}
+      cols={cols}
+      {...flexContainerProps}
+      {...flexItemProps}
+    >
       {children}
-    </div>
+    </Flex>
   );
 }
 
 
+CardRow.displayName = 'CardRow';
+
 CardRow.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  cols: PropTypes.number,
   empty: PropTypes.bool,
   soft: PropTypes.bool,
+  ...Flex.flexPropTypes,
+};
+
+CardRow.defaultProps = {
+  empty: false,
+  soft: false,
 };

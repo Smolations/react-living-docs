@@ -1,12 +1,19 @@
+@import '../vars';
+
 .CardCol {
-  position: relative;
-  flex: 1;
-  border-left: 1px solid $Card-sep-color;
-  padding: $Card-spacing;
-  padding-top: 14px;
+  border-left: 1px solid $card-sep-color;
+  padding: $card-spacing ($card-spacing / 2);
 
   &:first-of-type {
     border-left: 0;
+  }
+
+  &:first-child {
+    padding-left: $card-spacing;
+  }
+
+  &:last-child:not(.CardCol--dangling) {
+    padding-right: $card-spacing;
   }
 
   &.CardCol--slim {
@@ -16,11 +23,5 @@
 
   &.CardCol--soft {
     border-color: transparent;
-  }
-
-  // don't even ask...it _will_ be rectified
-  &.Col--min {
-    flex: none;
-    flex: initial;
   }
 }

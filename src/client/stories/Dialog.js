@@ -1,11 +1,19 @@
+import Story from 'lib/story';
 import React, { useEffect, useState }from 'react';
 
-// this import will be the tricky bit...needs to change paths
-// to the correct path given by the config
-// import { Dialog } from './';
+const globals = {
+  React,
+  useEffect,
+  useState,
+};
 
+const story = new Story('Dialog', {
+  globals,
+});
 
-export function SimpleDialog(props) {
+const _chapterProps = `{}`;
+
+const _chapterCode = `function SimpleDialog(props) {
   const containerStyles = {
     position: 'relative',
     height: '200px',
@@ -45,4 +53,13 @@ export function SimpleDialog(props) {
       </Dialog>
     </div>
   );
-}
+}`;
+
+story.addChapter({
+  id: 'SimpleDialog',
+  title: 'Simple Dialog',
+  props: _chapterProps,
+  code: _chapterCode,
+});
+
+export default story;
