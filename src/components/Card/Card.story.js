@@ -27,11 +27,9 @@ EmptyCard.defaultProps = {
 export function CardWithHeader(props) {
   return (
     <Card>
-      <Card.Head>
-        I am the card header.
-      </Card.Head>
+      <Header title="I am the card header." />
 
-      Otherwise, I am empty.
+      <Card.Row>Otherwise, I am empty.</Card.Row>
     </Card>
   );
 }

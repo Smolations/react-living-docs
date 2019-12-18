@@ -1,0 +1,50 @@
+.Header {
+  display: flex;
+  margin-top: 22px;
+  align-items: center;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    flex-grow: 1;
+    margin-top: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .Header--icon {
+    display: inline-block;
+    margin-right: 14px;
+    padding-top: 1px;
+    vertical-align: text-top;
+  }
+
+  .Header--search {
+    justify-content: flex-end;
+  }
+
+  .Card2 & {
+    padding: 10px 16px;
+    border-bottom: 1px solid $Card-border-color;
+  }
+
+  // .CardHead & {
+  //   flex-grow: 1;
+  // }
+
+  .Dialog & {
+    padding: $Dialog-vertical-padding $Dialog-horizontal-padding;
+  }
+
+  .Dialog--attached & {
+    margin-top: 0;
+    border-bottom: 1px solid $Dialog-border-color;
+  }
+}

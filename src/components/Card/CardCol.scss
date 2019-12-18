@@ -1,19 +1,17 @@
-@import '../vars';
-
 .CardCol {
-  border-left: 1px solid $card-sep-color;
-  padding: $card-spacing ($card-spacing / 2);
+  border-left: 1px solid $Card-sep-color;
+  padding: $Card-spacing ($Card-spacing / 2);
 
   &:first-of-type {
     border-left: 0;
   }
 
   &:first-child {
-    padding-left: $card-spacing;
+    padding-left: $Card-spacing;
   }
 
   &:last-child:not(.CardCol--dangling) {
-    padding-right: $card-spacing;
+    padding-right: $Card-spacing;
   }
 
   &.CardCol--slim {

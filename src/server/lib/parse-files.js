@@ -41,6 +41,8 @@ function parseFiles({
 
 
   filePaths.forEach((filePath, ndx) => {
+    console.log('\n\n')
+    console.log('------------------------------------------')
     console.log(`READING FILE:  ${filePath}`);
     console.log('------------------------------------------')
     const content = fs.readFileSync(filePath, { encoding: 'UTF-8' });
@@ -60,7 +62,6 @@ function parseFiles({
 
     // logAstToCode(ast);
 
-    console.log('\nEOF\n')
   });
 }
 

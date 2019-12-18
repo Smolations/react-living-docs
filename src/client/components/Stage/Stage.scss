@@ -14,5 +14,11 @@
     background-color: $white;
     border: 1px solid $neutral-tint-2;
     box-shadow: 0 0 4px $neutral-tint-2;
+
+    // need to figure out how to handle this when
+    // this project is a package. stage styles should
+    // match incoming component wrapper styles
+    font-family: $font-family-sans-serif;
+    font-size: $base-font-size;
   }
 }

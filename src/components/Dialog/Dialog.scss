@@ -1,3 +1,80 @@
 .Dialog {
+  position:relative;
+  width: 600px;
+
   background-color: $white;
+  border-radius: 3px;
+
+  // supporting native snappy styles outside of .App
+  font-family: $font-family-sans-serif;
+  font-size: $base-font-size;
+  line-height: 1.6;
+
+  overflow: hidden;
+
+  transition: transform 0.4s ease;
+
+  &.Dialog--from-top {
+    transform: translateY(-100vh);
+  }
+
+  &.Dialog--from-bottom {
+    transform: translateY(100vh);
+  }
+
+  &.Dialog--from-left {
+    transform: translateX(-100vh);
+  }
+
+  &.Dialog--from-right {
+    transform: translateX(100vh);
+  }
+
+
+  &.Dialog--attached {
+    position: absolute;
+    width: auto;
+    min-width: 600px;
+
+    border-radius: 0;
+
+    &.Dialog--from-top {
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    &.Dialog--from-bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    &.Dialog--from-left {
+      left: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    &.Dialog--from-right {
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+
+  &.Dialog--from-top,
+  &.Dialog--from-bottom,
+  &.Dialog--from-left,
+  &.Dialog--from-right {
+    &.Dialog--open {
+      transform: none;
+    }
+  }
+
+  // loading backdrop
+  .Backdrop {
+    background-color: rgba(255, 255, 255, 0.8)
+  }
 }

@@ -29,6 +29,21 @@ export default function Card(props) {
   // temporary name since .Card is taken
   const classes = ['Card2'];
 
+  // default header size according to common use matches with h3,
+  // so be sure to set it if not already set
+  const newChildren = React.Children.map(children, (child) => {
+    const { children: childChildren, ...otherChildProps } = child.props;
+    if (child.type.displayName === 'Header' && !otherChildProps.size) {
+      console.log('Card found Header! %o', child)
+      otherChildProps.size = 3;
+
+      return React.cloneElement(child, otherChildProps, childChildren);
+    }
+
+    return child;
+  });
+
+
   className && classes.push(...className.split(' '));
   secondary && classes.push('Card--secondary');
   wide && classes.push('Card--wide');
@@ -42,7 +57,7 @@ export default function Card(props) {
       dataType={dataType}
       flexDirection="column"
     >
-      {children}
+      {newChildren}
     </Flex>
   );
 }

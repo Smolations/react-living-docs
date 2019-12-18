@@ -1,0 +1,23 @@
+.DialogHead {
+  padding: $Dialog-vertical-padding $Dialog-horizontal-padding;
+
+  background-color: $white;
+
+  .Dialog--attached & {
+    border-bottom: 1px solid $Dialog-border-color;
+  }
+
+  button {
+    margin-left: auto;
+
+    background-color: transparent;
+    border: none;
+
+    color: $neutral-tint-3;
+    font-size: 30px;
+    font-style: normal;
+
+    cursor: pointer;
+    outline: none;
+  }
+}

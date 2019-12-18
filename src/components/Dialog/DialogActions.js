@@ -3,13 +3,12 @@ import React from 'react';
 
 import { Flex, pickFlexProps } from '../Flex';
 
-import './DialogHead.scss';
+import './DialogActions.scss';
 
 
-export default function DialogHead(props) {
+export default function DialogActions(props) {
   const {
     children,
-    title,
   } = props;
 
   const { flexContainerProps, flexItemProps } = pickFlexProps(props);
@@ -17,15 +16,15 @@ export default function DialogHead(props) {
 
   return (
     <Flex
-      className="DialogHead"
+      className="DialogActions"
       flexGrow={0}
       {...flexContainerProps}
       {...flexItemProps}
     >
-      {title ? title : children}
+      {children}
     </Flex>
   );
 }
 
 
-DialogHead.propTypes = {};
+DialogActions.propTypes = {};

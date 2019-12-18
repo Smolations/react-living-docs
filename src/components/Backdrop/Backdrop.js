@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import SVG from 'react-inlinesvg';
 
+import loadingSrc from './spinner.svg';
 import './Backdrop.scss';
 
 
@@ -71,9 +73,12 @@ export default function Backdrop(props) {
     );
 }
 
+Backdrop.displayName = 'Backdrop';
 
 Backdrop.propTypes = {};
 
 Backdrop.defaultProps = {
   onClick: () => {},
 };
+
+Backdrop.loadingSvg = (<SVG src={loadingSrc} />)

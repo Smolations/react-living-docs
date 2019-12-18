@@ -1,0 +1,9 @@
+.DialogBody {
+  padding: $Dialog-vertical-padding $Dialog-horizontal-padding;
+
+  background-color: $white;
+
+  .Dialog--attached & {
+    overflow-y: auto;
+  }
+}

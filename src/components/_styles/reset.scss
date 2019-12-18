@@ -1,0 +1,32 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin: 21px 0 0 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h1 {
+  font-size: $Header-size-1-font-size;
+}
+
+h2 {
+  font-size: $Header-size-2-font-size;
+}
+
+h3 {
+  font-size: $Header-size-3-font-size;
+}
+
+h4 {
+  font-size: $Header-size-4-font-size;
+}
+
+h5 {
+  font-size: $Header-size-5-font-size;
+}
+
+h6 {
+  font-size: $Header-size-6-font-size;
+}

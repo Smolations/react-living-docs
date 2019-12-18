@@ -1,10 +1,8 @@
-@import '../vars';
-
 // might be a good idea to eventually make this a flex layout...
 .Card2 {
   background-color: $white;
   border-radius: 3px;
-  border: 1px solid $card-border-color;
+  border: 1px solid $Card-border-color;
   box-shadow: 0 1px 0 $neutral-tint-2;
 
   // this looks to be custom styling for a specific view,
@@ -54,7 +52,7 @@
 
   + .Card2,
   + .Card {
-    margin-top: $page-main-spacing;
+    margin-top: $Page-main-spacing;
   }
 
   // used only in HPP; consider deprecation in favor
@@ -103,6 +101,6 @@
 .Card-foot {
   display: block;
   margin: 0;
-  padding: $card-spacing;
-  border-top: 1px solid $card-sep-color;
+  padding: $Card-spacing;
+  border-top: 1px solid $Card-sep-color;
 }

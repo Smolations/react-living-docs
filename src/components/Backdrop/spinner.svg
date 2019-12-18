@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="48" height="48" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+
+<defs>
+  <marker id='arrow' orient='auto' viewBox="0 0 10 10" markerUnits="userSpaceOnUse" markerWidth='10' markerHeight='10' refX='0.5' refY='5'>
+    <path d='M0,0 V10 L8,5 Z' fill='#A1B0AE' />
+  </marker>
+</defs>
+
+<g stroke="#A1B0AE" fill="none">
+  <path marker-end='url(#arrow)' stroke-width='3' d="M 65 50 A 15 15 0 1 1 60.60660171779821 39.39339828220179">
+    <animateTransform attributeName="transform" type="rotate" values="0 50,50;360 50,50" dur="2s" repeatCount="indefinite"  />
+  </path>
+
+  <path marker-end='url(#arrow)' stroke-width='2.5' d="M 77.5 50 A 27.5 27.5 0 1 1 74.92346414350787 38.377997802130764">
+    <animateTransform attributeName="transform" type="rotate" values="245 50,50;605 50,50" dur="3s" repeatCount="indefinite"  />
+  </path>
+
+  <path marker-end='url(#arrow)' stroke-width='2' d="M 92 50 A 42 42 0 1 1 90.16479975044749 37.72038840164505">
+    <animateTransform attributeName="transform" type="rotate" values="40 50,50;400 50,50" dur="4s" repeatCount="indefinite"  />
+  </path>
+</g>
+</svg>
